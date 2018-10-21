@@ -92,8 +92,8 @@ var listMoves=new Vue({
         }
     }
 });
+function parsedPgnToListMoves(parsedPgn){
 
-
-
+}
 
 

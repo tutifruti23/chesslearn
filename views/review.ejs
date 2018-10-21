@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title><%= title %></title>
-        <link rel='stylesheet' href='/stylesheets/style.css' />
-    </head>
-    <body>
-        <h1><%= title %></h1>
-        <p>Welcome to <%= title %></p>
-        
+<head>
+    <link rel='stylesheet' href='stylesheets/chessboard.css' />
 
+    <script src="javascripts/libraries/jquery.js"></script>
+    <script src="javascripts/libraries/chessboard.js"></script>
+    <script src="javascripts/libraries/chess.js"></script>
+    <script src="javascripts/libraries/stockfish.js"></script>
+    <script src="javascripts/libraries/PositionManipulator.js"></script>
+    <script src="javascripts/libraries/boardEventHandler.js"></script>
+    <script src="javascripts/libraries/Notation.js"></script>
 
+</head>
+<body>
+    <div id="app">
 
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    </body>
+        <div id="selector">
+            <button id="legalMoves" v-on:click="setMode('legalMovesMode')">"Legal moves</button>
+            <button id="allMoves" v-on:click="setMode('freeMode')">All moves</button>
+            <button id="spareMode" v-on:click="setMode('spareMode')">Spare mode</button>
+            <button id="oneSideColor" v-on:click="setMode('oneSideMovesMode')">One side moves</button>
+            <button id="oneSideColor" v-on:click="setMode('setPos')">set Pos</button>
+            <button id="oneSideColor" v-on:click="setMode('engineMode')">engine Mode</button>
+            <button id="oneSideColor" v-on:click="setMode('puzzleMode')">puzzle Mode</button>
+        </div>
+        <div id="board" style="width:400px;"></div>
+        <div id="not">
+            <div id="notation" v-html="display()" style="width:400px; height:400px;"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="javascripts/libraries/chessBoardEvents.js"></script>
+    <script src="javascripts/libraries/modes.js"></script>
+    <script src="javascripts/sites/review.js"></script>
+
+</body>
 </html>

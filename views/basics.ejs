@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+
+        <title>Portfolio Item - Start Bootstrap Template</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="javascripts/libraries/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+
+        <!-- Custom styles for this template -->
+        <link href="stylesheets/portfolio-item.css" rel="stylesheet"/>
+        <link href="stylesheets/simple-sidebar.css" rel="stylesheet"/>
+        <link rel='stylesheet' href='stylesheets/chessboard.css' />
+        <script src="javascripts/libraries/jquery.js"></script>
+        <script src="javascripts/libraries/chessboard.js"></script>
+        <script src="javascripts/libraries/chess.js"></script>
+        <script src="javascripts/libraries/stockfish.js"></script>
+        <script src="javascripts/libraries/PositionManipulator.js"></script>
+        <script src="javascripts/libraries/boardEventHandler.js"></script>
+        <script src="javascripts/libraries/Notation.js"></script>
+    </head>
+
+    <body>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="wrapper">
+            <div id="sidebar-wrapper">
+                <ul id="left-menu" class="sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="#">
+                            Basics
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" v-on:click="setHandler('r')">1. Rook</a>
+                    </li>
+                    <li>
+                        <a href="#" v-on:click="setHandler('b')">2. Bishop</a>
+                    </li>
+                    <li>
+                        <a href="#" v-on:click="setHandler('q')">3. Queen</a>
+                    </li>
+                    <li>
+                        <a href="#" v-on:click="setHandler('n')">4. Knight</a>
+                    </li>
+                    <li>
+                        <a href="#" v-on:click="setHandler('k')">6. King</a>
+                    </li>
+                    <li>
+                        <a href="#" v-on:click="setHandler('p')">7. Pawn</a>
+                    </li>
+                    <li>
+                        <a href="#">8. Pawn promotion</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <div class="container">
+
+                    <!-- Portfolio Item Heading -->
+                    <h1 class="my-4">Page Heading
+                        <small>Secondary Text</small>
+                    </h1>
+
+                    <!-- Portfolio Item Row -->
+                    <div class="row">
+
+                        <div class="col-md-8">
+                            <div id="board" style="width:600px;"></div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <h3 class="my-3">Project Description</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+                            <h3 class="my-3">Project Details</h3>
+                            <ul>
+                                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+                                <li>Lorem Ipsum</li>
+                                <li>Dolor Sit Amet</li>
+                                <li>Consectetur</li>
+                                <li>Adipiscing Elit</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- /.row -->
+
+
+                </div>
+
+
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript -->
+        <script src="javascripts/libraries/jquery/jquery.min.js"></script>
+        <script src="javascripts/libraries/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="javascripts/libraries/chessBoardEvents.js"></script>
+        <script src="javascripts/libraries/modes.js"></script>
+        <script src="javascripts/sites/basics.js"></script>
+        <script>
+            $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+            });
+
+        </script>
+    </body>
+
+</html>
