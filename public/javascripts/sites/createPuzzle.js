@@ -1,49 +1,55 @@
 let chessGame=ChessGame('board');
-chessGame.setMode(spareMode);
-
-let createPuzzleController=new Vue({
-    data:{
-        spareMode:true,
-
-
-    },
-    methods:{
-
-    },
-    computed:{
-
-    }
-});
 let engine=new Engine();
-let callback=function(event){
-    if(event.includes('pv')){
+let num_threads = 2;
+let MT = new Multithread(num_threads);
 
+let getEvent=function(event){
+    return event;
+};
+
+let writeLines=function(event){
+    if(event.includes('pv')){
         let info=engine.parseAnaliseLine(event);
-        console.log(info['pv']);
-        settings.setEngineLine(parseInt(info['multipv']),info['pv']);
+        settings.setEngineLine(parseInt(info['multipv']),info['pv'],info['cp'],info['mate']);
     }
+};
+function addSuccessInfo(text){
+    $('#login-form-link').removeClass('error');
+    $(this).addClass('success');
+    showAndclearInfo(text)
+}
+function addErrorInfo(text){
+    $('#login-form-link').removeClass('success');
+    $(this).addClass('error');
+    showAndclearInfo(text)
+}
+function showAndclearInfo(text){
+    $('#info').text(text);
+    setTimeout(function(){ $('#info').text(''); }, 3000);
+}
+let engineAnalise=MT.process(getEvent,writeLines);
+
+let callback=async function(event){
+    engineAnalise(event);
 };
 engine.init(callback);
 let puzzleSpareHandler={
-
-    init:function(chessBoard){},
-    update:async function(chessGame,chessboardFen){
-
-        //engine.goAnaliseDepth(PositionManipulator.chessboardFenToFen(chessboardFen,'w'),15,3);
+    init:function(chessBoard){
+        chessBoard.board.position(chessBoard.chess.fen());
+    },
+    update:function(chessGame,chessboardFen){
+        chessGame.chess.load(PositionManipulator.chessboardFenToFen(chessboardFen,settings.getColor(),settings.castling(),'-'));
     }
 };
 let variantCreatingHandler={
     init:function(chessBoard){
-        settings.listMoves=ListMoves(new Move('',PositionManipulator.chessboardFenToFen(chessBoard.board.fen(),settings.color),null));
-
+        settings.listMoves=NotationMethods.newListMoves(chessBoard.chess.fen());
     },
     update:function(chessBoard,move){
-        //moves.newMove(move.san,chessBoard.board.fen());
-        //engine.goAnaliseDepth(chessBoard.chess.fen(),settings.engineDepth,settings.engineLines);
         settings.listMoves.newMove(move,chessBoard.chess.fen());
     }
 };
-chessGame.setHandler(puzzleSpareHandler);
+
 let settings=new Vue({
     el:"#settings",
     data:{
@@ -54,25 +60,28 @@ let settings=new Vue({
         bqCastle:true,
         spareMode:true,
         engineDepth:15,
-        numberEngineLines:3,
-        listMoves:null,
+        enginePosition:'',
+        listMoves:NotationMethods.newListMoves(PositionManipulator.getStartFen()),
+        numberEngineLines:2,
         firstEngineLine:'',
         secondEngineLine:'',
         thirdEngineLine:''
     },
     methods: {
         changeToSetMode: function () {
-            let pos = PositionManipulator.chessboardFenToFen(chessGame.board.fen(),settings.color);
-            chessGame.setMode(gameMode);
-            chessGame.setPosition(pos);
+
             chessGame.setHandler(variantCreatingHandler);
+            chessGame.setMode(gameMode);
             chessGame.handlerInit();
+            settings.listMoves.setListener(function(move){
+                chessGame.setPosition(move.position);
+            });
+
         },
         backToSpareMode: function () {
-            let pos = chessGame.chess.fen();
-            chessGame.setMode(spareMode);
-            chessGame.setPosition(pos);
+
             chessGame.setHandler(puzzleSpareHandler);
+            chessGame.setMode(spareMode);
             chessGame.handlerInit();
         }, castling: function () {
             let res = "";
@@ -85,22 +94,59 @@ let settings=new Vue({
             if (this.bqCastle === true)
                 res+='q';
             return res;
-        },engineAnalise:function(){
-            engine.goAnaliseDepth(chessGame.chess.fen(),this.engineDepth,this.numberEngineLines);
-        },setEngineLine(num,line){
+        },engineAnalise:async function(){
+            this.enginePosition=chessGame.chess.fen();
+            engine.goAnaliseDepth(this.enginePosition,this.engineDepth,this.numberEngineLines);
+        },setEngineLine:function(num,line,cp,mate){
+            let notation=engine.variantEngineLineToNotation(line,this.enginePosition,1,cp,mate);
             switch (num){
-                case 1:this.firstEngineLine=line;break;
-                case 2:this.secondEngineLine=line;break;
-                case 3:this.thirdEngineLine=line;break;
+                case 1:this.firstEngineLine=notation;break;
+                case 2:this.secondEngineLine=notation;break;
+                case 3:this.thirdEngineLine=notation;break;
             }
+        },getListMoves:function(){
+            return this.listMoves.getNotation();
+        },setColor:function(color){
+            this.color=color;
         }
+        ,getColor:function(){
+            return this.color;
+        },downloadPgn:function(){
+            let filename='puzzle.pgn';
+            let file = new Blob([NotationMethods.listMovesToPgn(this.listMoves)], {type:'text/plain'});
+            let a = document.createElement("a"),
+                url = URL.createObjectURL(file);
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function() {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 5);
 
-
+        },savePgn:function(){
+            $.post(
+                '/createPuzzle/savePuzzle',
+                {
+                    fen:this.listMoves.firstMove.position,
+                    solution:this.listMoves.getRawNotation()
+                },
+                function(isSaved) {
+                    if(isSaved)
+                        addSuccessInfo('Saved!');
+                    else
+                        addErrorInfo('Error');
+                }
+            );
+        }
     },computed:{
 
     }
 });
-
+chessGame.setHandler(puzzleSpareHandler);
+chessGame.setMode(spareMode);
+chessGame.handlerInit();
 
 
 

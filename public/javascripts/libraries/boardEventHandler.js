@@ -1,14 +1,35 @@
 function pawnsCapturingEventHandler(piece){
     let eventHandler={
-        level:3,
+        level:1,
         pawnsLeft:0,
-        chess:new Chess(),
+        levelAccepted:true,
         update:function(chessBoard){
 
+            let numberOfPawns=0;
+            for(let i=0;i<64;i++){
+                let piece=chessBoard.chess.get(PositionManipulator.nrToSquare(i))
+                if(piece!==null && piece.color==='b'){
+                    numberOfPawns++;
+                }
+            }
+            if(numberOfPawns===this.pawnsLeft && numberOfPawns>0){
+                this.levelAccepted=false;
+            }else{
+                this.pawnsLeft--;
+            }
+            if(numberOfPawns===0){
+                if(this.levelAccepted && this.level<7)
+                    this.level++;
+                else if(!this.levelAccepted && this.level>1){
+                    this.level--;
+                }
+                this.init(chessBoard);
+            }
 
         },
         init:function(chessBoard){
-
+            this.pawnsLeft=this.level;
+            this.levelAccepted=true;
             generatePositionOneSideCapturing(chessBoard.chess,piece,this.level);
             chessBoard.refresh();
         }
@@ -25,6 +46,7 @@ function MainHandler(){
     return handler;
 }
 function generatePositionOneSideCapturing(chess,piece,numberOfPawns){
+    let tempChess=new Chess();
     chess.clear();
     PositionManipulator.changeSideOnMove(chess);
     let pieceSquare=PositionManipulator.nrToSquare(Math.floor(Math.random()*64));
@@ -48,6 +70,27 @@ function generatePositionOneSideCapturing(chess,piece,numberOfPawns){
             pawns.length=0;
             chess.clear();
             PositionManipulator.setPieces(chess,piece,'w',[pieceSquare]);
+        }
+        if(pawns.length===numberOfPawns && piece!=='k' && piece!== 'n'){
+            tempChess.clear();
+            PositionManipulator.setPieces(tempChess,piece,'w',[pieceSquare]);
+            PositionManipulator.setPieces(tempChess,'p','b',pawns);
+            let currentSquare=pieceSquare;
+            let move;
+            for(let i=0;i<pawns.length;i++){
+                move=tempChess.move({
+                    from: currentSquare,
+                    to:pawns[i],
+                    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+                });
+                currentSquare=pawns[i];
+                PositionManipulator.changeSideOnMove(tempChess);
+                if(move===null){
+                    pawns.length=0;
+                    break;
+                }
+
+            }
         }
     }
     PositionManipulator.setPieces(chess,piece,'w',[pieceSquare]);

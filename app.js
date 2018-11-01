@@ -10,6 +10,9 @@ let reviewRouter=require('./routes/review');
 let basicsRouter=require('./routes/basics');
 let loginRouter=require('./routes/login');
 let createPuzzleRouter=require('./routes/createPuzzle');
+let solvePuzzleRouter=require('./routes/solvePuzzles');
+let createExerciseRouter=require('./routes/createExercise');
+let solveExerciseRouter=require('./routes/solveExercise');
 let app = express();
 
 // view engine setup
@@ -27,14 +30,15 @@ app.use('/review',reviewRouter);
 app.use('/basics',basicsRouter);
 app.use('/login',loginRouter);
 app.use('/createPuzzle',createPuzzleRouter);
-
+app.use('/solvePuzzle',solvePuzzleRouter);
+app.use('/createExercise',createExerciseRouter);
+app.use('/solveExercise',solveExerciseRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
-let pgnParser=require('./models/pgnParser');
-pgnParser.pgnParse();
+
 
 
 // error handler

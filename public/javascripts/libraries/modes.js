@@ -1,8 +1,10 @@
-function  gameMode(chessGame){
+function  gameMode(chessGame,isAllowOnlyOneSideMode,noOverMode){
+    let pos=chessGame.chess.fen();
+    let color=chessGame.chess.turn();
     let onDragStart = function(source, piece, position, orientation) {
-        if (chessGame.chess.game_over() === true ||
+        if ((chessGame.chess.game_over() === true && !noOverMode) ||
             (chessGame.chess.turn() === 'w' && piece.search(/^b/) !== -1) ||
-            (chessGame.chess.turn() === 'b' && piece.search(/^w/) !== -1)) {
+            (chessGame.chess.turn() === 'b' && piece.search(/^w/) !== -1) || (isAllowOnlyOneSideMode && chessGame.chess.turn()!==color )) {
             return false;
         }
     };
@@ -15,7 +17,7 @@ function  gameMode(chessGame){
         });
         // illegal move
         if (move === null) return 'snapback';
-
+        chessGame.handlerUpdate(move.san);
     };
 
 // update the board position after the piece snap
@@ -23,36 +25,33 @@ function  gameMode(chessGame){
     let onSnapEnd = function() {
         chessGame.board.position(chessGame.chess.fen());
     };
-    let cfg = {
+    return{
         draggable: true,
-        position: 'start',
+        position: pos,
         onDragStart: onDragStart,
         onDrop: onDrop,
         onSnapEnd: onSnapEnd
     };
-    return cfg;
+}
+function allowOnlyOneSideMode(chessGame){
+    return gameMode(chessGame,true);
 }
 function freeMode(){
-    let cfg = {
+    return{
         draggable: true,
         position: 'start'
     };
-    return cfg;
 }
 function spareMode(chessGame){
     let onChange= function(oldPos,newPos) {
         chessGame.handlerUpdate(ChessBoard.objToFen(newPos))
     };
-
-
-    const cfg = {
+    return {
         draggable: true,
         dropOffBoard: 'trash',
         sparePieces: true,
         onChange:onChange,
-
     };
-    return cfg;
 }
 function oneColorMovesMode(chessGame){
     let onDragStart = function(source, piece, position, orientation) {
@@ -75,23 +74,75 @@ function oneColorMovesMode(chessGame){
             PositionManipulator.changeSideOnMove(chessGame.chess);
         }
     };
-
 // update the board position after the piece snap
 // for castling, en passant, pawn promotion
     let onSnapEnd = function() {
         chessGame.board.position(chessGame.chess.fen());
     };
-    let cfg = {
+    return {
         draggable: true,
         position: 'start',
         onDragStart: onDragStart,
         onDrop: onDrop,
         onSnapEnd: onSnapEnd
     };
-    return cfg;
-};
-function engineMode(chessGame){
+}
+function oneColorMovesModeWithoutKingControl(){
+    let tempChess=new Chess();
+    let onDragStart = function(source, piece, position, orientation) {
+        if (
+            (chessGame.chess.turn() === 'w' && piece.search(/^b/) !== -1) ||
+            (chessGame.chess.turn() === 'b' && piece.search(/^w/) !== -1)) {
+            return false;
+        }
+    };
+    let onDrop = function(source, target) {
+        // see if the move is legal
 
+        let piece=chessGame.chess.get(source);
+        if(piece.type==='k'){
+            tempChess.clear();
+            tempChess.put(piece,source);
+            let controlMove=tempChess.move({
+                from: source,
+                to: target,
+                promotion: 'q' // NOTE: always promote to a queen for example simplicity
+            });
+            if(controlMove!==null){
+                chessGame.chess.remove(source);
+                chessGame.chess.put(piece,target);
+                chessGame.handlerUpdate(controlMove.san);
+            }else{
+                return 'snapback';
+            }
+        }else{
+            let move = chessGame.chess.move({
+                from: source,
+                to: target,
+                promotion: 'q' // NOTE: always promote to a queen for example simplicity
+            });
+            // illegal move
+            if (move === null) return 'snapback';
+            else{
+                PositionManipulator.changeSideOnMove(chessGame.chess);
+                chessGame.handlerUpdate(move.san);
+            }
+        }
+    };
+// update the board position after the piece snap
+// for castling, en passant, pawn promotion
+    let onSnapEnd = function() {
+        chessGame.board.position(chessGame.chess.fen());
+    };
+    return {
+        draggable: true,
+        onDragStart: onDragStart,
+        onDrop: onDrop,
+        onSnapEnd: onSnapEnd
+    };
+}
+function engineMode(chessGame){
+    engine=STOCKFISH();
     function uciCmd(cmd) {
         engine.postMessage(cmd);
     }
@@ -133,14 +184,12 @@ function engineMode(chessGame){
     let onSnapEnd = function() {
         chessGame.board.position(chessGame.chess.fen());
     };
-    let cfg = {
+    return {
         draggable: true,
-        position: 'start',
         onDragStart: onDragStart,
         onDrop: onDrop,
         onSnapEnd: onSnapEnd
     };
-    return cfg;
 }
 function puzzleMode(chessGame){
     let color=chessGame.chess.turn();
@@ -162,7 +211,6 @@ function puzzleMode(chessGame){
         });
         // illegal move
         if (move === null) return 'snapback';
-
     };
 
 // update the board position after the piece snap
@@ -171,12 +219,14 @@ function puzzleMode(chessGame){
         chessGame.board.position(chessGame.chess.fen());
     };
 
-    let cfg = {
+    return {
         draggable: true,
-        position: 'start',
         onDragStart: onDragStart,
         onDrop: onDrop,
         onSnapEnd: onSnapEnd
     };
-    return cfg;
+}
+function noOverMode(chessGame){
+    return gameMode(chessGame,false,true);
+
 }

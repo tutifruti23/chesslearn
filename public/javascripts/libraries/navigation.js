@@ -87,13 +87,11 @@ var listMoves=new Vue({
                 res+=this.getAllMoves(move.next_moves[i],move.next_moves[0],mainElem);
             }
             if(move.next_moves.length>0)
-                res+=this.getAllMoves(move.next_moves[0],move.next_moves[0],mainElem)
+                res+=this.getAllMoves(move.next_moves[0],move.next_moves[0],mainElem);
             return res;
         }
     }
 });
-function parsedPgnToListMoves(parsedPgn){
 
-}
 
 
