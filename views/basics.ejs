@@ -12,6 +12,8 @@
         <link href="stylesheets/portfolio-item.css" rel="stylesheet"/>
         <link href="stylesheets/simple-sidebar.css" rel="stylesheet"/>
         <link rel='stylesheet' href='stylesheets/chessboard.css' />
+        <link rel='stylesheet' href='stylesheets/basics.css' />
+        <script src="javascripts/data/basics.js"></script>
         <script src="javascripts/libraries/chessboard.js"></script>
         <script src="javascripts/libraries/chess.js"></script>
         <script src="javascripts/libraries/stockfish.js"></script>
@@ -32,43 +34,43 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" v-on:click="setHandler('r')">1. Rook</a>
+                        <a href="#" v-on:click="setHandler('r',0)">1. Rook</a>
                     </li>
                     <li>
-                        <a href="#" v-on:click="setHandler('b')">2. Bishop</a>
+                        <a href="#" v-on:click="setHandler('b',1)">2. Bishop</a>
                     </li>
                     <li>
-                        <a href="#" v-on:click="setHandler('q')">3. Queen</a>
+                        <a href="#" v-on:click="setHandler('q',2)">3. Queen</a>
                     </li>
                     <li>
-                        <a href="#" v-on:click="setHandler('n')">4. Knight</a>
+                        <a href="#" v-on:click="setHandler('n',3)">4. Knight</a>
                     </li>
                     <li>
-                        <a href="#" v-on:click="setHandler('k')">6. King</a>
+                        <a href="#" v-on:click="setHandler('k',4)">5. King</a>
                     </li>
                     <li>
-                        <a href="#" v-on:click="setHandler('p')">7. Pawn</a>
+                        <a href="#" v-on:click="setHandler('p',5)">6. Pawn</a>
                     </li>
                     <li>
-                        <a href="#">8. Pawn promotion</a>
+                        <a href="#">7. Pawn promotion</a>
                     </li>
                     <li>
-                        <a href="#" v-on:click="setHandler('checking')">9. Check</a>
+                        <a href="#" v-on:click="setHandler('checking',7)">8. Check</a>
                     </li>
                     <li>
-                        <a href="#"  v-on:click="setHandler('defendCheck')">10. Defend against check</a>
+                        <a href="#"  v-on:click="setHandler('defendCheck',8)">9. Defend against check</a>
                     </li>
                     <li>
-                        <a href="#">11. Checkmate</a>
+                        <a href="#">10. Checkmate</a>
                     </li>
                     <li>
-                        <a href="#">12. Stalemate</a>
+                        <a href="#">11. Stalemate</a>
                     </li>
                     <li>
-                        <a href="#">13. Castle</a>
+                        <a href="#">12. Castle</a>
                     </li>
                     <li>
-                        <a href="#">14. En-passant</a>
+                        <a href="#" v-on:click="setHandler('enPassant',12)">13. En-passant</a>
                     </li>
                 </ul>
             </div>
@@ -79,26 +81,22 @@
                     <!-- Portfolio Item Heading -->
                     <h1 class="my-4">Basics
                         <small  id="info"></small>
+                        <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Chapters</a>
                     </h1>
 
                     <!-- Portfolio Item Row -->
                     <div class="row">
 
-                        <div class="col-md-8">
-                            <div id="board" style="width:600px;"></div>
+                        <div class="col-md-8 d-flex justify-content-center">
+                            <div id="board" style="width:500px;"></div>
                         </div>
 
-                        <div class="col-md-4">
-                            <h3 class="my-3">Project Description</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
-                            <h3 class="my-3">Project Details</h3>
+                        <div class="col-md-4" id="guide">
+                            <h3 class="my-3">{{title}}</h3>
                             <ul>
-                                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
-                                <li>Lorem Ipsum</li>
-                                <li>Dolor Sit Amet</li>
-                                <li>Consectetur</li>
-                                <li>Adipiscing Elit</li>
+                                <li v-for="line in description">{{line}}</li>
                             </ul>
+                            <img class="img-example" v-if="img!==''" v-bind:src="getImgPath()"/>
                         </div>
 
                     </div>
