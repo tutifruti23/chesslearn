@@ -11,7 +11,7 @@ let puzzleHandler={
     init:function(){},
     update:function(chessboard,move){
         settings.listMoves.next();
-        if(move===settings.listMoves.current.move){
+        if(move.san === settings.listMoves.current.move){
             if(settings.listMoves.hasNextMoves()){
                 setTimeout(function(){
                     settings.listMoves.next();
@@ -45,7 +45,7 @@ let reviewHandler={
         settings.reviewMode=true;
     },
     update:function(chessBoard,move){
-        settings.listMoves.newMove(move,chessBoard.chess.fen());
+        settings.listMoves.newMove(move.san,chessBoard.chess.fen());
     }
 };
 let chessGame=ChessGame('board');

@@ -44,7 +44,7 @@ let loadRandomExercise=function(){
 let exerciseHandler={
     init:function(){},
     update:function(chessBoard,move){
-        settings.listMoves.newMove(move,chessBoard.chess.fen());
+        settings.listMoves.newMove(move.san,chessBoard.chess.fen());
         if(!isGameOver(true)){
             setTimeout(function() {engine.goDepth(chessBoard.chess.fen(),15)},50);
         }
@@ -67,7 +67,7 @@ function changeToExerciseMode(){
 let reviewHandler={
     init:function(){},
     update:function(chessBoard,move){
-        settings.listMoves.newMove(move,chessBoard.chess.fen());
+        settings.listMoves.newMove(move.san,chessBoard.chess.fen());
     }
 };
 let chessGame=ChessGame('board');

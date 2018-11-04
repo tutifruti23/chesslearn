@@ -2,3 +2,13 @@
     width:200px;
     height: 200px;
 }
+.goodBadMark{
+    height:40px;
+    width:30px;
+}
+.goodBadCounter{
+    font-size: 30px;
+}
+.lastResult{
+    font-weight: bold;
+}

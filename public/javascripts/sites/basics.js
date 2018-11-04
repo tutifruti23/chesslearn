@@ -1,5 +1,5 @@
 let chessGame=ChessGame('board');
-let guideAndTips;
+let guideAndTips,counters;
 let chapterRewinder=new Vue({
     el:'#left-menu',
     data:{},
@@ -7,7 +7,7 @@ let chapterRewinder=new Vue({
         setMode: function (name) {
         },
         setHandler: function (chapter,dataIndex) {
-
+            guideAndTips.setData(data[dataIndex]);
             switch (chapter) {
                 case'b':
                 case'n':
@@ -31,14 +31,27 @@ let chapterRewinder=new Vue({
                     chessGame.setHandler(checkHandler(false));
                     chessGame.setMode(noOverMode);
                     break;
+                case 'checkmate':
+                    positionHandler.validator=function(chess){return chess.in_checkmate()};
+                    chessGame.setHandler(positionHandler);
+                    chessGame.setMode(gameMode);
+                    break;
+                case 'stalemate':
+                    positionHandler.validator=function(chess){return chess.in_draw()};
+                    chessGame.setHandler(positionHandler);
+                    chessGame.setMode(gameMode);
+                    break;
+                case 'castle':
+                    positionHandler.validator=function(chess,move){return move.flags==='k'|| move.flags==='q'};
+                    chessGame.setHandler(positionHandler);
+                    chessGame.setMode(gameMode);
+                    break;
                 case 'enPassant':
                     chessGame.setHandler(enPassantHandler);
                     chessGame.setMode(noOverMode);
                     break;
-
             }
             chessGame.handlerInit();
-            guideAndTips.setData(data[dataIndex]);
         }
     },
     computed:{}
@@ -65,6 +78,22 @@ guideAndTips=new Vue({
         }
     }
 });
+counters=new Vue({
+    el:'#counters',
+    data:{
+        goodCount:0,
+        badCount:0,
+        lastResult:''
+    },methods:{
+        increaseCounter:function(isGood){
+            this.lastResult=isGood?'good':'bad';
+            if(isGood)
+                this.goodCount++;
+            else
+                this.badCount++;
+        }
+    }
+});
 function checkHandler(isCheckingSide){
     return {
         checkingSide: isCheckingSide,
@@ -83,11 +112,13 @@ function checkHandler(isCheckingSide){
         update: function (chessBoard, move) {
             this.numberOfMoves++;
             if (!this.checkingSide) {
+                counters.increaseCounter(true);
                 PositionManipulator.randomMoveWithCheck(chessBoard.chess);
             }else{
+                counters.increaseCounter(chessBoard.chess.in_check());
                 PositionManipulator.randomMove(chessBoard.chess);
             }
-            if(chessBoard.chess.turn()==='b' || this.numberOfMoves===5 || chessBoard.chess.moves().length===0){
+            if(chessBoard.chess.turn()==='b' || this.numberOfMoves===5 || chessBoard.chess.moves().length<2){
                     this.init(chessBoard);
             }
             setTimeout(function () {
@@ -113,7 +144,6 @@ function checkHandler(isCheckingSide){
     }
 
 }
-
 let pawnHandler={
     currentMoves:[],
     init:function(chessBoard){
@@ -124,9 +154,11 @@ let pawnHandler={
         chessBoard.refresh();
     },
     update:function(chessBoard,move){
-        this.currentMoves = this.currentMoves.filter(e => e !== move);
-        if(this.currentMoves.length===0)
+        this.currentMoves = this.currentMoves.filter(e => e !== move.san);
+        if(this.currentMoves.length===0){
+            counters.increaseCounter(true);
             this.init(chessBoard);
+        }
         else{
             chessBoard.chess.undo();
             chessBoard.refresh();
@@ -162,7 +194,6 @@ let pawnHandler={
         }
     }
 };
-
 let enPassantHandler={
     init:function(chessBoard){
 
@@ -174,7 +205,8 @@ let enPassantHandler={
             chessBoard.refresh();
         },500);
     },
-    update:function(chessBoard){
+    update:function(chessBoard,move){
+        counters.increaseCounter(move.flags==='e');
         this.init(chessBoard);
     },
     generatePawns:function(chess){
@@ -196,7 +228,6 @@ let enPassantHandler={
         PositionManipulator.changeSideOnMove(chess);
         let whiteResponses=[];
         let longPawnsMoves=chess.moves({verbose:true}).filter(move=> move.flags === 'b');
-        console.log(longPawnsMoves);
         let move;
         do{
             move=longPawnsMoves[Math.floor(Math.random()*longPawnsMoves.length)];
@@ -209,17 +240,112 @@ let enPassantHandler={
         chess.move(move);
     }
 };
-
 let positionHandler={
-    positions:[],
     init:function (chessBoard) {
-        chessBoard.load(this.positions[Math.floor(Math.random()*this.positions.length)]);
+        let pos=guideAndTips.positions[Math.floor(Math.random()*guideAndTips.positions.length)];
+        chessBoard.chess.load(pos);
         chessBoard.refresh();
     },
     update:function(chessBoard,move){
-        this.init();
+        this.validate(chessBoard.chess,move);
+        let handler=this;
+        setTimeout(
+            function(){handler.init(chessBoard)},500
+        );
     },
-    setPositions(positions){
-        this.positions=positions;
-    },validator:null
+    validator:null,
+    validate:function(chess,move){
+        if(this.validator!==null)
+            counters.increaseCounter(this.validator(chess,move));
+    }
 };
+function pawnsCapturingEventHandler(piece){
+    let eventHandler={
+        level:1,
+        pawnsLeft:0,
+        levelAccepted:true,
+        update:function(chessBoard,move){
+            let numberOfPawns=0;
+            for(let i=0;i<64;i++){
+                let piece=chessBoard.chess.get(PositionManipulator.nrToSquare(i))
+                if(piece!==null && piece.color==='b'){
+                    numberOfPawns++;
+                }
+            }
+            if(numberOfPawns===this.pawnsLeft && numberOfPawns>0){
+                this.levelAccepted=false;
+            }else{
+                this.pawnsLeft--;
+            }
+            if(numberOfPawns===0){
+                counters.increaseCounter(this.levelAccepted);
+                if(this.levelAccepted && this.level<7)
+                    this.level++;
+                else if(!this.levelAccepted && this.level>1){
+                    this.level--;
+                }
+                this.init(chessBoard);
+            }
+
+        },
+        init:function(chessBoard){
+            this.pawnsLeft=this.level;
+            this.levelAccepted=true;
+            generatePositionOneSideCapturing(chessBoard.chess,piece,this.level);
+            chessBoard.refresh();
+        }
+    };
+    return eventHandler;
+}
+function generatePositionOneSideCapturing(chess,piece,numberOfPawns){
+    let tempChess=new Chess();
+    chess.clear();
+    PositionManipulator.changeSideOnMove(chess);
+    let pieceSquare=PositionManipulator.nrToSquare(Math.floor(Math.random()*64));
+    PositionManipulator.setPieces(chess,piece,'b',[pieceSquare]);
+    let pawns=[];
+    while(pawns.length<numberOfPawns){
+        let moves=chess.moves({verbose:true});
+        let notUsedSquares=[];
+        for(let i=0;i<moves.length;i++){
+            let nextSquare=moves[i];
+            if(!pawns.includes(nextSquare.to) && nextSquare.to !== pieceSquare){
+                notUsedSquares.push(nextSquare);
+            }
+        }
+        if(notUsedSquares.length>0){
+            let chosenSquare=notUsedSquares[(Math.floor(Math.random()*notUsedSquares.length))];
+            pawns.push(chosenSquare.to);
+            chess.move(chosenSquare);
+            PositionManipulator.changeSideOnMove(chess);
+        }else{
+            pawns.length=0;
+            chess.clear();
+            PositionManipulator.setPieces(chess,piece,'w',[pieceSquare]);
+        }
+        if(pawns.length===numberOfPawns && piece!=='k' && piece!== 'n'){
+            tempChess.clear();
+            PositionManipulator.setPieces(tempChess,piece,'w',[pieceSquare]);
+            PositionManipulator.setPieces(tempChess,'p','b',pawns);
+            let currentSquare=pieceSquare;
+            let move;
+            for(let i=0;i<pawns.length;i++){
+                move=tempChess.move({
+                    from: currentSquare,
+                    to:pawns[i],
+                    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+                });
+                currentSquare=pawns[i];
+                PositionManipulator.changeSideOnMove(tempChess);
+                if(move===null){
+                    pawns.length=0;
+                    break;
+                }
+
+            }
+        }
+    }
+    PositionManipulator.setPieces(chess,piece,'w',[pieceSquare]);
+    PositionManipulator.setPieces(chess,'p','b',pawns);
+    PositionManipulator.changeSideOnMove(chess);
+}

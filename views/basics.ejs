@@ -18,11 +18,9 @@
         <script src="javascripts/libraries/chess.js"></script>
         <script src="javascripts/libraries/stockfish.js"></script>
         <script src="javascripts/libraries/PositionManipulator.js"></script>
-        <script src="javascripts/libraries/boardEventHandler.js"></script>
         <script src="javascripts/libraries/Notation.js"></script>
     </head>
     <body>
-
         <!-- Navigation -->
         <% include includes/menu.ejs %>
         <div id="wrapper">
@@ -61,13 +59,13 @@
                         <a href="#"  v-on:click="setHandler('defendCheck',8)">9. Defend against check</a>
                     </li>
                     <li>
-                        <a href="#">10. Checkmate</a>
+                        <a href="#" v-on:click="setHandler('checkmate',9)">10. Checkmate</a>
                     </li>
                     <li>
-                        <a href="#">11. Stalemate</a>
+                        <a href="#" v-on:click="setHandler('stalemate',10)">11. Stalemate</a>
                     </li>
                     <li>
-                        <a href="#">12. Castle</a>
+                        <a href="#" v-on:click="setHandler('castle',11)">12. Castle</a>
                     </li>
                     <li>
                         <a href="#" v-on:click="setHandler('enPassant',12)">13. En-passant</a>
@@ -88,7 +86,28 @@
                     <div class="row">
 
                         <div class="col-md-8 d-flex justify-content-center">
-                            <div id="board" style="width:500px;"></div>
+                            <div class="p-2">
+                                <div id="board" style="width:500px;"></div>
+                            </div>
+                            <div class="p-2 align-self-center" id="counters">
+                                <div class="row">
+                                    <div class="col">
+                                        <img class="goodBadMark" src="img/basics/good.png"/>
+                                    </div>
+                                    <div class="col">
+                                        <div class="goodBadCounter" v-bind:class="{ lastResult: lastResult==='good' }">{{goodCount}}</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <img class="goodBadMark"  src="img/basics/bad.png"/>
+
+                                    </div>
+                                    <div class="col">
+                                        <div class="goodBadCounter" v-bind:class="{ lastResult: lastResult==='bad' }"> {{badCount}}</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-md-4" id="guide">

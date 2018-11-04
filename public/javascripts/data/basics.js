@@ -64,9 +64,9 @@ let data=[{
       description:[],
       img:"checkmate.png",
       positions:[
-          '6k1/3Q4/6K1/8/8/8/8/8 w - -',
-          '6k1/8/6K1/8/8/8/4R3/8 w - -',
-          '2k5/2B5/2K5/8/2N5/8/8/8 w - -'
+          '6k1/3Q4/6K1/8/8/8/8/8 w - - 0 1',
+          '6k1/8/6K1/8/8/8/4R3/8 w - - 0 1',
+          '2k5/2B5/2K5/8/2N5/8/8/8 w - - 0 1'
       ]
   },{
       title:"Stalemate",
@@ -74,16 +74,19 @@ let data=[{
       description:[],
       img:"stalemate.png",
         positions:[
-            '7k/8/6KP/8/8/8/8/8 w - -',
-            '7k/8/7K/8/8/8/8/7B w - -',
-            '2k5/2B5/2K5/8/2N5/8/8/8 w - -'
+            '7k/8/6KP/8/8/8/8/8 w - - 0 1',
+            '2k5/2B5/2K5/8/2N5/8/8/8 w - - 0 1'
         ]
   },{
       title:"Castle",
       exerciseDescription:"",
       description:[],
       img:"castle.png",
-
+        positions:[
+            '1r2kr2/8/8/8/8/8/8/R3K2R w KQkq - 0 1',
+            '8/8/8/8/8/8/2k5/R3K2R w KQkq - 0 1',
+            '1k6/8/8/8/3b4/8/8/R3K2R w KQkq - 0 1'
+        ]
   },{
       title:"En-passant",
       exerciseDescription:"",

@@ -46,7 +46,7 @@ let variantCreatingHandler={
         settings.listMoves=NotationMethods.newListMoves(chessBoard.chess.fen());
     },
     update:function(chessBoard,move){
-        settings.listMoves.newMove(move,chessBoard.chess.fen());
+        settings.listMoves.newMove(move.san,chessBoard.chess.fen());
     }
 };
 

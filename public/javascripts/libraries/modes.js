@@ -17,7 +17,7 @@ function  gameMode(chessGame,isAllowOnlyOneSideMode,noOverMode){
         });
         // illegal move
         if (move === null) return 'snapback';
-        chessGame.handlerUpdate(move.san);
+        chessGame.handlerUpdate(move);
     };
 
 // update the board position after the piece snap
@@ -111,7 +111,7 @@ function oneColorMovesModeWithoutKingControl(){
             if(controlMove!==null){
                 chessGame.chess.remove(source);
                 chessGame.chess.put(piece,target);
-                chessGame.handlerUpdate(controlMove.san);
+                chessGame.handlerUpdate(controlMove);
             }else{
                 return 'snapback';
             }
@@ -125,7 +125,7 @@ function oneColorMovesModeWithoutKingControl(){
             if (move === null) return 'snapback';
             else{
                 PositionManipulator.changeSideOnMove(chessGame.chess);
-                chessGame.handlerUpdate(move.san);
+                chessGame.handlerUpdate(move);
             }
         }
     };
