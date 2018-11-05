@@ -3,7 +3,6 @@
     <head>
         <% include includes/scriptsAndSheets.ejs %>
         <link rel='stylesheet' href='stylesheets/chessboard.css' />
-
         <link href="stylesheets/portfolio-item.css" rel="stylesheet"/>
         <link href="stylesheets/notation.css" rel="stylesheet"/>
         <script src="javascripts/libraries/modes.js"></script>
@@ -15,13 +14,12 @@
         <script src="javascripts/libraries/Notation.js"></script>
         <script src="javascripts/libraries/engine.js"></script>
         <script src="javascripts/libraries/multithread.js"></script>
-
     </head>
     <body>
         <% include includes/menu.ejs %>
         <div class="container content">
             <!-- Portfolio Item Row -->
-            <div class="row">
+            <div class="row" id="puzzleAndUserInfo">
                 <div class="col-3 border d-flex  flex-column justify-content-between p-0">
                     <div class="d-flex border-bottom flex-column justify-content-between w-100 p-2">
                         <div>Puzzle <span> ?</span></div>

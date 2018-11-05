@@ -2,8 +2,9 @@ let engine=new Engine();
 engine.init(function(event){
     let match = event.match(/^bestmove ([a-h][1-8])([a-h][1-8])([qrbk])?/);
     if(match){
-        chessGame.chess.move({from: match[1], to: match[2], promotion: match[3]});
+        let move=chessGame.chess.move({from: match[1], to: match[2], promotion: match[3]});
         chessGame.board.position( chessGame.chess.fen());
+        settings.listMoves.newMove(move.san,chessGame.chess.fen());
         isGameOver(false);
     }
 });
@@ -11,7 +12,7 @@ let isGameOver=function(lastPlayerMove){
     if(chessGame.chess.game_over() && !settings.reviewMode){
         console.log(chessGame.chess.in_draw());
         console.log(chessGame.chess.in_checkmate());
-        console.log('koniec');
+        changeToReview(true);
         return true;
     }else{
         return false;
@@ -36,6 +37,7 @@ let loadRandomExercise=function(){
         function(result){
             settings.currentPuzzle=result;
             chessGame.setPosition(result.fen);
+            settings.playerColor=chessGame.chess.turn();
             NotationMethods.newPosition(settings.listMoves,result.fen);
             changeToExerciseMode();
         }
@@ -50,7 +52,8 @@ let exerciseHandler={
         }
     }
 };
-function changeToReview(){
+function changeToReview(isOk){
+    settings.lastScore=isOk;
     settings.reviewMode=true;
     chessGame.setHandler(reviewHandler);
     chessGame.setMode(gameMode);
@@ -79,6 +82,8 @@ let settings=new Vue({
         listMoves:NotationMethods.newListMoves(PositionManipulator.getStartFen()),
         userLogged:'',
         reviewMode:true,
+        playerColor:'',
+        lastScore:true,
         currentPuzzle:{}
     },
     methods:{
@@ -89,6 +94,30 @@ let settings=new Vue({
             return this.reviewMode?this.listMoves.getNotation():this.listMoves.getRawNotation();
         },giveUp:function(){
             changeToReview(false);
+        },getInfoText:function(){
+            if(this.reviewMode){
+                return this.lastScore?'Correct!':'Exercise failed';
+            }else{
+                return 'Win with '+(this.playerColor==='w'?'white':'black');
+            }
+
+        },getInfoImagePath(){
+            if(this.reviewMode){
+                return "img/basics/"+(this.lastScore?'good':'bad')+".png";
+            }else{
+                return "img/chesspieces/wikipedia/"+(this.playerColor==='b'?'b':'w')+"R.png";
+            }
         }
     }
+});
+let exerciseAndUserInfo=new Vue({
+    el:"#exerciseAndUserInfo",
+    data:{
+        exercise:{},
+        userData:{}
+    },setExerciseId:function(){
+
+
+    }
+
 });

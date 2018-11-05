@@ -3,8 +3,8 @@
     <head>
         <% include includes/scriptsAndSheets.ejs %>
         <link rel='stylesheet' href='stylesheets/chessboard.css' />
-
         <link href="stylesheets/portfolio-item.css" rel="stylesheet"/>
+        <link href="stylesheets/notation.css" rel="stylesheet"/>
         <script src="javascripts/libraries/modes.js"></script>
         <script src="javascripts/libraries/jquery.js"></script>
         <script src="javascripts/libraries/chessboard.js"></script>
@@ -15,63 +15,46 @@
         <script src="javascripts/libraries/Notation.js"></script>
         <script src="javascripts/libraries/engine.js"></script>
         <script src="javascripts/libraries/multithread.js"></script>
-
     </head>
     <body>
         <% include includes/menu.ejs %>
-        <div class="container">
-
-            <!-- Portfolio Item Heading -->
-            <h1 class="my-4 col">Solve Exercises
-                <small  id="info"></small>
-            </h1>
-
+        <div class="container content" id="app">
             <!-- Portfolio Item Row -->
             <div class="row">
+                <div class="col-3 border d-flex  flex-column justify-content-between p-0">
+                    <div class="d-flex border-bottom flex-column justify-content-between w-100 p-2">
+                        <div>Exercise <span> ?</span></div>
+                        <div>Exercise level: <span>?</span></div>
+                    </div>
+                    <div class="d-flex border-top flex-column justify-content-between w-100 p-2">
+                        <div>Your ranking: <span> ?</span></div>
+                        <div>Last repetition : <span>?</span></div>
+                    </div>
 
-                <div class="col-md-8">
-                    <div id="board" style="width:600px;"></div>
                 </div>
-
-                <div id="settings" class="col-md-4">
-
-                    <h3 class="my-3">Info</h3>
-                    <div class="row">
-                        <div class="col-6 btn btn-primary active" v-on:click="changeToSetMode()">Position</div>
-                        <div class="col-6 btn btn-primary"  v-on:click="backToSpareMode()">Spare mode </div>
+                <div class="col-6 border justify-content-center d-flex  flex-column">
+                    <div class="p-2 w-100" >
+                        <div id="board" style="width:100%;"></div>
                     </div>
-                    <div class="row">
-                        <label class="radio-inline col-3"><input type="radio" name="colorRadio" checked="true" v-on:click="setColor('w')" /> white</label>
-                        <label class="radio-inline col-3"><input type="radio" name="colorRadio" v-on:click="setColor('b')"/> black </label>
-                    </div>
-                    <div class="row ">
-                        <div class="checkbox col-4">
-                            <label><input type="checkbox" checked="true" value=""/>white 0-0</label>
-                        </div>
-                        <div class="checkbox col-4">
-                            <label><input type="checkbox" checked="true" value=""/>white 0-0-0</label>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="checkbox  col-4">
-                            <label><input type="checkbox" checked="true"  value="" />black 0-0</label>
-                        </div>
-                        <div class="checkbox col-4">
-                            <label><input type="checkbox"  checked="true"  value=""/>black 0-0-0</label>
-                        </div>
-                    </div>
-                    <div class="row">
+                </div>
+                <div id="settings" class="col-3 border justify-content-between d-flex  flex-column">
+                    <div class="row notation h-50">
                         <div class="col">
                             <div id="notation" v-html="getListMoves()">
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="btn btn-primary col-12" v-on:click="giveUp()">Show solution</div>
+                    <div class="row h-25" v-if="playerColor!==''">
+                        <div class="col-3 p-1 h-50 w-25 m-auto">
+                            <img v-bind:src="getInfoImagePath()" class="w-100"> </img>
+                        </div>
+                        <div class="offset-1 col-8  pt-3   m-auto align-middle">
+                            {{getInfoText()}}
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="btn btn-success col-12" v-on:click="nextPuzzle()">Next puzzle</div>
+                    <div class="row h-25">
+                        <div class="btn big-button btn-danger col-12"  v-if="!reviewMode" v-on:click="giveUp()">Give up</div>
+                        <div class="btn big-button btn-success col-12" v-if="reviewMode"  v-on:click="nextPuzzle()">Next exercise</div>
                     </div>
                 </div>
             </div>
