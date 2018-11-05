@@ -2,60 +2,26 @@ let chessGame=ChessGame('board');
 let guideAndTips,counters;
 let chapterRewinder=new Vue({
     el:'#left-menu',
-    data:{},
+    data:{
+        chapters:chapters,
+        selectedItem:-1
+    },
     methods: {
         setMode: function (name) {
-        },
-        setHandler: function (chapter,dataIndex) {
-            guideAndTips.setData(data[dataIndex]);
-            switch (chapter) {
-                case'b':
-                case'n':
-                case'k':
-                case'r':
-                case'q':
-                    chessGame.setHandler(pawnsCapturingEventHandler(chapter));
-                    chessGame.setMode(oneColorMovesModeWithoutKingControl);
-                    break;
-                case'p':
-                    chessGame.setHandler(pawnHandler);
-                    chessGame.setMode(noOverMode);
-                    break;
-                case'pPromotion':
-                    break;
-                case 'checking':
-                    chessGame.setHandler(checkHandler(true));
-                    chessGame.setMode(noOverMode);
-                    break;
-                case 'defendCheck':
-                    chessGame.setHandler(checkHandler(false));
-                    chessGame.setMode(noOverMode);
-                    break;
-                case 'checkmate':
-                    positionHandler.validator=function(chess){return chess.in_checkmate()};
-                    chessGame.setHandler(positionHandler);
-                    chessGame.setMode(gameMode);
-                    break;
-                case 'stalemate':
-                    positionHandler.validator=function(chess){return chess.in_draw()};
-                    chessGame.setHandler(positionHandler);
-                    chessGame.setMode(gameMode);
-                    break;
-                case 'castle':
-                    positionHandler.validator=function(chess,move){return move.flags==='k'|| move.flags==='q'};
-                    chessGame.setHandler(positionHandler);
-                    chessGame.setMode(gameMode);
-                    break;
-                case 'enPassant':
-                    chessGame.setHandler(enPassantHandler);
-                    chessGame.setMode(noOverMode);
-                    break;
-            }
+        },setData:function(index){
+            guideAndTips.setData(data[index]);
+        },changeChapter:function(index){
+            this.selectedItem=index;
+            this.setData(index);
+            this.chapters[index].method();
+            console.log(index);
             chessGame.handlerInit();
+            chessGame.refresh();
         }
     },
     computed:{}
 });
+
 guideAndTips=new Vue({
     el:'#guide',
     data:{
@@ -94,6 +60,7 @@ counters=new Vue({
         }
     }
 });
+chapterRewinder.changeChapter(0);
 function checkHandler(isCheckingSide){
     return {
         checkingSide: isCheckingSide,

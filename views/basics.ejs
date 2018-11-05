@@ -23,94 +23,46 @@
     <body>
         <!-- Navigation -->
         <% include includes/menu.ejs %>
-        <div id="wrapper">
-            <div id="sidebar-wrapper">
-                <ul id="left-menu" class="sidebar-nav">
-                    <li class="sidebar-brand">
-                        <a href="#">
-                            Basics
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" v-on:click="setHandler('r',0)">1. Rook</a>
-                    </li>
-                    <li>
-                        <a href="#" v-on:click="setHandler('b',1)">2. Bishop</a>
-                    </li>
-                    <li>
-                        <a href="#" v-on:click="setHandler('q',2)">3. Queen</a>
-                    </li>
-                    <li>
-                        <a href="#" v-on:click="setHandler('n',3)">4. Knight</a>
-                    </li>
-                    <li>
-                        <a href="#" v-on:click="setHandler('k',4)">5. King</a>
-                    </li>
-                    <li>
-                        <a href="#" v-on:click="setHandler('p',5)">6. Pawn</a>
-                    </li>
-                    <li>
-                        <a href="#">7. Pawn promotion</a>
-                    </li>
-                    <li>
-                        <a href="#" v-on:click="setHandler('checking',7)">8. Check</a>
-                    </li>
-                    <li>
-                        <a href="#"  v-on:click="setHandler('defendCheck',8)">9. Defend against check</a>
-                    </li>
-                    <li>
-                        <a href="#" v-on:click="setHandler('checkmate',9)">10. Checkmate</a>
-                    </li>
-                    <li>
-                        <a href="#" v-on:click="setHandler('stalemate',10)">11. Stalemate</a>
-                    </li>
-                    <li>
-                        <a href="#" v-on:click="setHandler('castle',11)">12. Castle</a>
-                    </li>
-                    <li>
-                        <a href="#" v-on:click="setHandler('enPassant',12)">13. En-passant</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- Page Content -->
-            <div id="page-content-wrapper">
-                <div class="container">
+                <div class="container content">
 
                     <!-- Portfolio Item Heading -->
-                    <h1 class="my-4">Basics
-                        <small  id="info"></small>
-                        <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Chapters</a>
-                    </h1>
+
 
                     <!-- Portfolio Item Row -->
                     <div class="row">
-
-                        <div class="col-md-8 d-flex justify-content-center">
-                            <div class="p-2">
-                                <div id="board" style="width:500px;"></div>
+                        <div class="col-3  border d-flex m-0 p-0" >
+                            <ul id="left-menu"  class="list-group w-100 p-0 m-0">
+                                <li class="list-group-item" v-for="(chapter,index) in chapters" v-on:click="changeChapter(index)" v-bind:class="{active:selectedItem === index}">
+                                    {{index+1}}. {{chapter.name}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-6 border justify-content-center d-flex  flex-column">
+                            <div class="p-2 w-100" >
+                                <div id="board" style="width:100%;"></div>
                             </div>
-                            <div class="p-2 align-self-center" id="counters">
-                                <div class="row">
-                                    <div class="col">
+                            <div class="p-2 align-self-center d-flex" id="counters">
+                                <div class="p-2 d-flex">
+                                    <div class="p-2">
                                         <img class="goodBadMark" src="img/basics/good.png"/>
                                     </div>
-                                    <div class="col">
+                                    <div class="p-2">
                                         <div class="goodBadCounter" v-bind:class="{ lastResult: lastResult==='good' }">{{goodCount}}</div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
+                                <div class="p-2 d-flex">
+                                    <div class="p-2">
                                         <img class="goodBadMark"  src="img/basics/bad.png"/>
 
                                     </div>
-                                    <div class="col">
+                                    <div class="p-2">
                                         <div class="goodBadCounter" v-bind:class="{ lastResult: lastResult==='bad' }"> {{badCount}}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-4" id="guide">
+                        <div class="col-3 border" id="guide">
                             <h3 class="my-3">{{title}}</h3>
                             <ul>
                                 <li v-for="line in description">{{line}}</li>
@@ -125,8 +77,7 @@
                 </div>
 
 
-            </div>
-        </div>
+
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="javascripts/libraries/chessBoardEvents.js"></script>
         <script src="javascripts/libraries/modes.js"></script>

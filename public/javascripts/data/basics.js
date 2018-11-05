@@ -53,7 +53,7 @@ let data=[{
       img:"check.png",
 
   },{
-      title:"Check- defend",
+      title:"Check - defend",
       exerciseDescription:"",
       description:[],
       img:"checkdefend.png",
@@ -94,3 +94,97 @@ let data=[{
       img:"enpassant.png",
   }
 ];
+let chapters=[
+    {
+        name:"Rook",
+            method:function(){
+            console.log('dzia;am');
+            chessGame.setHandler(pawnsCapturingEventHandler('r'));
+            chessGame.setMode(oneColorMovesModeWithoutKingControl);
+        }
+    },
+    {
+        name:"Bishop",
+            method:function(){
+            chessGame.setHandler(pawnsCapturingEventHandler('b'));
+            chessGame.setMode(oneColorMovesModeWithoutKingControl);
+        }
+    },
+    {
+        name:"Queen",
+            method:function(){
+            chessGame.setHandler(pawnsCapturingEventHandler('q'));
+            chessGame.setMode(oneColorMovesModeWithoutKingControl);
+        }
+    },
+    {
+        name:"Knight",
+            method:function(){
+            chessGame.setHandler(pawnsCapturingEventHandler('n'));
+            chessGame.setMode(oneColorMovesModeWithoutKingControl);
+        }
+    },
+    {
+        name:"King",
+            method:function(){
+            chessGame.setHandler(pawnsCapturingEventHandler('k'));
+            chessGame.setMode(oneColorMovesModeWithoutKingControl);
+        }
+    },
+    {
+        name:"Pawn",
+            method:function(){
+            chessGame.setHandler(pawnHandler);
+            chessGame.setMode(noOverMode);
+        }
+    },
+    {
+        name:"Pawn promotion",
+            method:function(){}
+    },
+    {
+        name:"Check",
+            method:function(){
+            chessGame.setHandler(checkHandler(true));
+            chessGame.setMode(noOverMode);
+        }
+    },
+    {
+        name:"Check - defend",
+        method:function(){
+            chessGame.setHandler(checkHandler(false));
+            chessGame.setMode(noOverMode);
+        }
+    },
+    {
+        name:"Checkmate",
+            method:function(){
+            positionHandler.validator=function(chess){return chess.in_checkmate()};
+            chessGame.setHandler(positionHandler);
+            chessGame.setMode(gameMode);
+        }
+    },
+    {
+        name:"Stalemate",
+            method:function(){
+            positionHandler.validator=function(chess){return chess.in_draw()};
+            chessGame.setHandler(positionHandler);
+            chessGame.setMode(gameMode);
+        }
+    },
+    {
+        name:"Castle",
+            method:function(){
+            positionHandler.validator=function(chess,move){return move.flags==='k'|| move.flags==='q'};
+            chessGame.setHandler(positionHandler);
+            chessGame.setMode(gameMode);
+        }
+    },
+    {
+        name:"En-passant",
+            method:function(){
+            chessGame.setHandler(enPassantHandler);
+            chessGame.setMode(noOverMode);
+        }
+    }
+]
