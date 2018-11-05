@@ -1,0 +1,14 @@
+.mainLine{
+    font-weight: bold;
+
+}
+.currentMove{
+    color:red;
+}
+.singleMove:hover{
+    cursor:pointer;
+}
+.notation{
+    overflow-y: scroll;
+
+}

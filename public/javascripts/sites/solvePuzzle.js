@@ -2,8 +2,10 @@ let loadRandomPuzzle=function(){
     $.get(
         '/solvePuzzle/newRandomPuzzle',
         function(result){
+            changeToPuzzleMode();
            chessGame.setPosition(result.fen);
            NotationMethods.arrayMovesToListMoves(result.fen,settings.listMoves,result.solution);
+           settings.playerColor=chessGame.chess.turn();
         }
     );
 };
@@ -27,7 +29,8 @@ let puzzleHandler={
             changeToReview(false);
     },
 };
-function changeToReview(){
+function changeToReview(isOk){
+    settings.lastScore=isOk;
     settings.reviewMode=true;
     chessGame.setHandler(reviewHandler);
     chessGame.setMode(gameMode);
@@ -56,17 +59,34 @@ let settings=new Vue({
     data:{
         listMoves:NotationMethods.newListMoves(PositionManipulator.getStartFen()),
         userLogged:'',
-        reviewMode:false
+        reviewMode:true,
+        lastScore:true,
+        playerColor:''
     },
     methods:{
         nextPuzzle:function(){
-            changeToPuzzleMode();
             loadRandomPuzzle()
         },
         getListMoves:function(){
             return this.listMoves.getNotation();
         },giveUp:function(){
             changeToReview(false);
+        },getInfoImagePath(){
+            if(this.reviewMode){
+                return "img/basics/"+(this.lastScore?'good':'bad')+".png";
+            }else{
+
+                return "img/chesspieces/wikipedia/"+(this.playerColor==='b'?'b':'w')+"R.png";
+            }
+
+        },getInfoText(){
+            let res;
+            if(this.reviewMode){
+                res=this.lastScore?'Correct!':"Puzzle failed.";
+            }else{
+                res=(this.playerColor==='w'?'white':'black')+ ' to move';
+            }
+            return res;
         }
     }
 });
