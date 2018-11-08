@@ -52,8 +52,7 @@ $(function() {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
-            console.log(user);
-            console.log('zalogowano');
+            location.href='/basics';
         } else {
             // User is signed out.
             // ...

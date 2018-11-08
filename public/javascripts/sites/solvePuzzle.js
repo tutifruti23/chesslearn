@@ -2,6 +2,7 @@ let loadRandomPuzzle=function(){
     $.get(
         '/solvePuzzle/newRandomPuzzle',
         function(result){
+            currentPuzzle=result;
             changeToPuzzleMode();
            chessGame.setPosition(result.fen);
            NotationMethods.arrayMovesToListMoves(result.fen,settings.listMoves,result.solution);
@@ -9,6 +10,22 @@ let loadRandomPuzzle=function(){
         }
     );
 };
+let setScore=function(score){
+    setDataWithToken(function(token){
+        $.post(
+            'solvePuzzle/solvePuzzle',{
+                score:score,
+                token:token,
+                puzzleId:currentPuzzle.id,
+                docId:currentPuzzle.docId
+            },
+            function(newRanking){
+                console.log(newRanking);
+            }
+        )
+    });
+};
+let currentPuzzle={};
 let puzzleHandler={
     init:function(){},
     update:function(chessboard,move){
@@ -37,6 +54,7 @@ function changeToReview(isOk){
     settings.listMoves.setListener(function(move){
         chessGame.setPosition(move.position);
     });
+    setScore(isOk?1:-1);
 }
 function changeToPuzzleMode(){
     settings.reviewMode=false;

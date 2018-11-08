@@ -6,3 +6,12 @@ admin.initializeApp({
 });
 exports.admin=admin;
 exports.db=admin.firestore();
+exports.getUserIdFromToken=function(token,callback){
+    admin.auth().verifyIdToken(token)
+        .then(function(decodedToken) {
+            callback( decodedToken.uid)
+        }).catch(function(error) {
+        // Handle error
+    });
+
+};

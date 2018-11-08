@@ -1,0 +1,6 @@
+#accountInfoMenu{
+    display:none;
+}
+.dropdown-item{
+    cursor: pointer;
+}
