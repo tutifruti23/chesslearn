@@ -8,7 +8,6 @@ exports.changeRating=function(userId,newRating,callback){
 exports.getUserRating=function(userId,callback){
     db.collection('users').doc(userId).get().then(function(doc){
         let data=doc.data();
-        console.log(data);
         callback(data.rating);
     });
 };

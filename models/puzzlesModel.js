@@ -16,7 +16,7 @@ exports.savePuzzle=function(puzzle,callback){
             let currentId=data['currentId'];
             let puzzlesRef= db.collection('puzzles').doc();
             transaction.update(sfDocRef, { numberOfPuzzles: newNumberOfPuzzles,currentId:currentId+1});
-            transaction.set(puzzlesRef,{rating:1500,fen:puzzle.fen, solution:puzzle.solution,id:currentId});
+            transaction.set(puzzlesRef,{rating:1500,fen:puzzle.fen, solution:puzzle.solution,id:currentId,attempts:0});
         });
     }).then(function() {
         callback(true);

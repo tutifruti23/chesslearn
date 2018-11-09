@@ -27,7 +27,6 @@ function newRankings(player1Rating,player2Rating,k1,k2,score){
 
 }
 exports.solvePuzzle=function(puzzleDocId,userRanking,score,callback){
-    console.log(score);
     let ratings;
     let sfDocRef = db.collection("puzzles").doc(puzzleDocId);
 
@@ -38,9 +37,9 @@ exports.solvePuzzle=function(puzzleDocId,userRanking,score,callback){
             }
             let data=sfDoc.data();
             let puzzleRanking=data.rating;
-            let newCount=data.countSolved+1;
+            let newCount=data.attempts+1;
             ratings=newRankings(userRanking,puzzleRanking,20,10,score);
-            transaction.update(sfDocRef, { countSolved:newCount,rating:ratings.r2});
+            transaction.update(sfDocRef, { attempts:newCount,rating:ratings.r2});
         });
     }).then(function() {
         callback(true,ratings.r1);

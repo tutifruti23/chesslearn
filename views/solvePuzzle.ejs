@@ -19,19 +19,18 @@
         <% include includes/menu.ejs %>
         <div class="container content">
             <!-- Portfolio Item Row -->
-            <div class="row" id="puzzleAndUserInfo">
-                <div class="col-3 border d-flex  flex-column justify-content-between p-0">
+            <div class="row" >
+                <div class="col-3 border d-flex  flex-column justify-content-between p-0" id="userAndPuzzleData">
                     <div class="d-flex border-bottom flex-column justify-content-between w-100 p-2">
-                        <div>Puzzle <span> ?</span></div>
-                        <div>Puzzle rating: <span>?</span></div>
-                        <div>Attempts: <span>?</span></div>
+                        <div>Puzzle <span>{{getPuzzleId()}}</span></div>
+                        <div>Puzzle rating: <span>{{getPuzzleRating()}}</span></div>
+                        <div>Attempts: <span>{{getPuzzleAttempts()}}</span></div>
                     </div>
                     <div class="d-flex border-top flex-column justify-content-between w-100 p-2">
-                        <div>Your ranking: <span> ?</span></div>
-                        <div>Solved: <span>?</span></div>
-                        <div>Unsolved: <span>?</span></div>
+                        <div>Your ranking: <span> {{rating}}</span></div>
+                        <div>Solved: <span>{{solved}}</span></div>
+                        <div>Unsolved: <span>{{unsolved}}</span></div>
                     </div>
-
                 </div>
                 <div class="col-6 border justify-content-center d-flex  flex-column">
                     <div class="p-2 w-100" >

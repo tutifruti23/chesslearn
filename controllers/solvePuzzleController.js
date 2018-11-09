@@ -9,7 +9,7 @@ exports.solvePuzzle=function(req,res){
                 if(isDone){
                     userModel.changeRating(userId,newUserRating,function (isDone) {
                         res.send({
-                            newRating:newUserRating
+                            rating:newUserRating
                         });
                     });
                 }

@@ -2,7 +2,7 @@ let loadRandomPuzzle=function(){
     $.get(
         '/solvePuzzle/newRandomPuzzle',
         function(result){
-            currentPuzzle=result;
+            userAndPuzzleData.puzzleData=result;
             changeToPuzzleMode();
            chessGame.setPosition(result.fen);
            NotationMethods.arrayMovesToListMoves(result.fen,settings.listMoves,result.solution);
@@ -16,16 +16,53 @@ let setScore=function(score){
             'solvePuzzle/solvePuzzle',{
                 score:score,
                 token:token,
-                puzzleId:currentPuzzle.id,
-                docId:currentPuzzle.docId
+                puzzleId:userAndPuzzleData.puzzleData.id,
+                docId:userAndPuzzleData.puzzleData.docId
             },
-            function(newRanking){
-                console.log(newRanking);
+            function(data){
+                userAndPuzzleData.rating=data.rating;
             }
         )
     });
 };
-let currentPuzzle={};
+function getUserRating(token){
+    $.post(
+        'solvePuzzle/getRating'
+       ,{
+            token:token
+        },
+            function (data) {
+
+            userAndPuzzleData.rating=data.rating;
+        }
+    );
+}
+
+let userAndPuzzleData=new Vue({
+    el:"#userAndPuzzleData",
+    data:{
+        rating:'?',
+        solved:0,
+        unsolved:0,
+        puzzleData:undefined
+    },methods:{
+        increaseCounter:function(isGood){
+            if(isGood)
+                this.solved++;
+            else
+                this.unsolved++;
+        },getPuzzleId:function(){
+            return this.puzzleData===undefined?'?':'#'+this.puzzleData.id;
+
+        },getPuzzleRating:function(){
+            return this.puzzleData===undefined?'?':this.puzzleData.rating;
+        },
+        getPuzzleAttempts:function(){
+            return this.puzzleData===undefined?'?':this.puzzleData.attempts;
+        }
+    }
+});
+
 let puzzleHandler={
     init:function(){},
     update:function(chessboard,move){
@@ -47,6 +84,7 @@ let puzzleHandler={
     },
 };
 function changeToReview(isOk){
+    userAndPuzzleData.increaseCounter(isOk);
     settings.lastScore=isOk;
     settings.reviewMode=true;
     chessGame.setHandler(reviewHandler);
@@ -110,3 +148,10 @@ let settings=new Vue({
 });
 
 
+function initInfo(){
+    userData.rating='?';
+    userAndPuzzleData.userData=userData;
+    setDataWithToken(function (token) {
+        getUserRating(token);
+    })
+}

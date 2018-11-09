@@ -3,6 +3,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         userData=user;
         displayUserData(user);
+        initInfo();
     } else {
         console.log('user not login');
         // No user is signed in.
