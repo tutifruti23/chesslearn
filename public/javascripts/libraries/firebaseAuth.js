@@ -5,8 +5,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         displayUserData(user);
         initInfo();
     } else {
-        console.log('user not login');
-        // No user is signed in.
+        logout();
     }
 });
 function displayUserData(user){
@@ -22,10 +21,10 @@ function signIn(){
 
 }
 function signOut(){
-    console.log('logout');
     firebase.auth().signOut().then(function() {
         displayUserData();
         userData=undefined;
+        logout();
     }, function(error) {
         // An error happened.
     });

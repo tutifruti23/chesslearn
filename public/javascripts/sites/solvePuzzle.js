@@ -149,9 +149,10 @@ let settings=new Vue({
 
 
 function initInfo(){
-    userData.rating='?';
-    userAndPuzzleData.userData=userData;
     setDataWithToken(function (token) {
         getUserRating(token);
     })
+}
+function logout(){
+    userAndPuzzleData.rating='?';
 }

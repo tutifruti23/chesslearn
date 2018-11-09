@@ -42,7 +42,7 @@ let puzzleSpareHandler={
     }
 };
 let settings=new Vue({
-    el:"#settings",
+    el:"#app",
     data:{
         color:'w',
         wkCastle:true,
@@ -76,9 +76,9 @@ let settings=new Vue({
         },setEngineLine:function(num,line,cp,mate){
             let notation=engine.variantEngineLineToNotation(line,this.enginePosition,1,cp,mate);
             switch (num){
-                case 1:this.firstEngineLine=notation;break;
-                case 2:this.secondEngineLine=notation;break;
-                case 3:this.thirdEngineLine=notation;break;
+                case 1:this.firstEngineLine='1. '+ notation;break;
+                case 2:this.secondEngineLine='2. '+notation;break;
+                case 3:this.thirdEngineLine='3. '+ notation;break;
             }
         },setColor:function(color){
             this.color=color;
