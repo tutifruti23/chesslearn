@@ -6,15 +6,14 @@ let ChessGame=function(boardId){
         chess:new Chess(),
         eventHandler:null,
         initBoard:function(){
+            this.board.destroy();
             this.board=ChessBoard(this.boardId,this.cfg);
         },
         setMode:function(mode){
             this.cfg=mode(this);
             this.initBoard();
-
-
         },refresh:function(){
-            this.board.position(this.chess.fen());1
+            this.board.position(this.chess.fen());
         },
         setPosition:function(fen) {
             this.board.position(fen);

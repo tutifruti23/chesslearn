@@ -14,19 +14,22 @@ let writeLines=function(event){
     }
 };
 function addSuccessInfo(text){
-    $('#login-form-link').removeClass('error');
-    $(this).addClass('success');
+    let info=$('#info');
+    info.removeClass('errorInfo');
+    info.addClass('successInfo');
     showAndclearInfo(text)
 }
 function addErrorInfo(text){
-    $('#login-form-link').removeClass('success');
-    $(this).addClass('error');
+    let info=$('#info');
+    info.removeClass('successInfo');
+    info.addClass('errorInfo');
     showAndclearInfo(text)
 }
 function showAndclearInfo(text){
     $('#info').text(text);
     setTimeout(function(){ $('#info').text(''); }, 3000);
 }
+
 let engineAnalise=MT.process(getEvent,writeLines);
 
 let callback=async function(event){
@@ -36,9 +39,10 @@ engine.init(callback);
 let puzzleSpareHandler={
     init:function(chessBoard){
         chessBoard.board.position(chessBoard.chess.fen());
+        settings.listMoves=NotationMethods.newListMoves(chessBoard.chess.fen());
     },
     update:function(chessGame,chessboardFen){
-        chessGame.chess.load(PositionManipulator.chessboardFenToFen(chessboardFen,settings.getColor(),settings.castling(),'-'));
+        chessGame.chess.load(PositionManipulator.chessboardFenToFen(chessboardFen,settings.getColor(),settings.castling(),settings.getEnpassant()));
     }
 };
 let variantCreatingHandler={
@@ -51,7 +55,7 @@ let variantCreatingHandler={
 };
 
 let settings=new Vue({
-    el:"#settings",
+    el:"#app",
     data:{
         color:'w',
         wkCastle:true,
@@ -59,6 +63,7 @@ let settings=new Vue({
         bkCastle:true,
         bqCastle:true,
         spareMode:true,
+        enpassant:'',
         engineDepth:15,
         enginePosition:'',
         listMoves:NotationMethods.newListMoves(PositionManipulator.getStartFen()),
@@ -69,7 +74,8 @@ let settings=new Vue({
     },
     methods: {
         changeToSetMode: function () {
-
+            chessGame.chess.load(PositionManipulator.chessboardFenToFen(ChessBoard.objToFen(chessGame.board.position()),settings.getColor(),settings.castling(),settings.getEnpassant()));
+            this.spareMode=false;
             chessGame.setHandler(variantCreatingHandler);
             chessGame.setMode(gameMode);
             chessGame.handlerInit();
@@ -79,7 +85,7 @@ let settings=new Vue({
 
         },
         backToSpareMode: function () {
-
+            this.spareMode=true;
             chessGame.setHandler(puzzleSpareHandler);
             chessGame.setMode(spareMode);
             chessGame.handlerInit();
@@ -94,7 +100,10 @@ let settings=new Vue({
             if (this.bqCastle === true)
                 res+='q';
             return res;
-        },engineAnalise:async function(){
+        },getEnpassant:function () {
+             return  this.enpassant===''?'-':this.enpassant;
+        },
+        engineAnalise:async function(){
             this.enginePosition=chessGame.chess.fen();
             engine.goAnaliseDepth(this.enginePosition,this.engineDepth,this.numberEngineLines);
         },setEngineLine:function(num,line,cp,mate){
@@ -106,10 +115,7 @@ let settings=new Vue({
             }
         },getListMoves:function(){
             return this.listMoves.getNotation();
-        },setColor:function(color){
-            this.color=color;
-        }
-        ,getColor:function(){
+        }, getColor:function(){
             return this.color;
         },downloadPgn:function(){
             let filename='puzzle.pgn';
@@ -126,19 +132,31 @@ let settings=new Vue({
             }, 5);
 
         },savePgn:function(){
-            $.post(
-                '/createPuzzle/savePuzzle',
-                {
-                    fen:this.listMoves.firstMove.position,
-                    solution:this.listMoves.getRawNotation()
-                },
-                function(isSaved) {
-                    if(isSaved)
-                        addSuccessInfo('Saved!');
-                    else
-                        addErrorInfo('Error');
+            let notation=this.listMoves.getRawNotation().trim();
+            if(notation===""){
+                addErrorInfo('Solution can not be empty');
+            }else{
+                $.post(
+                    '/createPuzzle/savePuzzle',
+                    {
+                        fen:this.listMoves.firstMove.position,
+                        solution:this.listMoves.getRawNotation()
+                    },
+                    function(isSaved) {
+                        if(isSaved)
+                            addSuccessInfo('Saved!');
+                        else
+                            addErrorInfo('Error');
+                    }
+                );
+            }
+        },setPosition(pos){
+            if(this.spareMode){
+                switch (pos){
+                    case 'start':chessGame.setPosition(PositionManipulator.getStartFen());break;
+                    case 'empty':chessGame.setPosition(PositionManipulator.getEmptyBoardFen());break;
                 }
-            );
+            }
         }
     },computed:{
 
@@ -147,7 +165,6 @@ let settings=new Vue({
 chessGame.setHandler(puzzleSpareHandler);
 chessGame.setMode(spareMode);
 chessGame.handlerInit();
-
 
 
 

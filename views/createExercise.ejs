@@ -51,7 +51,7 @@
 
         <div id="settings" class="col-3 border justify-content-top d-flex  flex-column">
 
-        <div class="d-flex justify-content-left">
+        <div class="d-flex justify-content-left ">
             <div class="p-2">
                 Turn:
             </div>
@@ -63,29 +63,35 @@
                 White:
             </div>
             <div class="checkbox p-2">
-                <label><input type="checkbox" checked="false" value=""/>0-0</label>
+                <label><input type="checkbox" v-model="wkCastle" value=""/>0-0</label>
             </div>
             <div class="checkbox p-2">
-                <label><input type="checkbox" checked="false" value=""/>0-0-0</label>
+                <label><input type="checkbox" v-model="wqCastle"  value=""/>0-0-0</label>
             </div>
         </div>
         <div class="d-flex justify-content-left">
             <div class="p-2">
-               Black:
+                Black:
             </div>
             <div class="checkbox p-2">
-                <label><input type="checkbox" checked="false" value=""/>0-0</label>
+                <label><input type="checkbox" v-model="bkCastle" value=""/>0-0</label>
             </div>
             <div class="checkbox p-2">
-                <label><input type="checkbox" checked="false" value=""/>0-0-0</label>
+                <label><input type="checkbox" v-model="bqCastle" value=""/>0-0-0</label>
             </div>
+        </div>
+        <div class="d-flex justify-content-left">
+            <div class="p-2 col-5">
+                En passant:
+            </div>
+            <input type="text" class="col-3 form-control" />
         </div>
         <div class="d-flex justify-content-left">
             <div class="p-2">
                Result:
             </div>
-            <label class="radio-inline p-2"><input type="radio" name="colorRadio" checked="true"  />win</label>
-            <label class="radio-inline p-2"><input type="radio" name="colorRadio" /> draw </label>
+            <label class="radio-inline p-2"><input type="radio" name="resultRadio" checked="true"  />win</label>
+            <label class="radio-inline p-2"><input type="radio" name="resultRadio" /> draw </label>
         </div>
         <div class="row">
             <div class="btn btn-primary col-12" v-on:click="saveExercise()">Save</div>

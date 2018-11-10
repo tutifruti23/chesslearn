@@ -14,13 +14,13 @@ let writeLines=function(event){
     }
 };
 function addSuccessInfo(text){
-    $('#login-form-link').removeClass('error');
-    $(this).addClass('success');
+    $('#login-form-link').removeClass('errorInfo');
+    $(this).addClass('successInfo');
     showAndclearInfo(text)
 }
 function addErrorInfo(text){
-    $('#login-form-link').removeClass('success');
-    $(this).addClass('error');
+    $('#login-form-link').removeClass('successInfo');
+    $(this).addClass('errorInfo');
     showAndclearInfo(text)
 }
 function showAndclearInfo(text){
