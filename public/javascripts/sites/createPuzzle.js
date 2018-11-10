@@ -99,9 +99,16 @@ let settings=new Vue({
                 res+='k';
             if (this.bqCastle === true)
                 res+='q';
-            return res;
+            return res===''?'-':res;
         },getEnpassant:function () {
-             return  this.enpassant===''?'-':this.enpassant;
+            let res='-';
+            let enp=this.enpassant;
+            if(this.enpassant.length===2
+                && enp.charCodeAt(0)>=97
+                && enp.charCodeAt(0)<105
+                && (settings.color==='w'&&enp.charAt(1)==='6'|| settings.color==='b'&&enp.charAt(1)==='3'))
+                    res=enp;
+             return  res;
         },
         engineAnalise:async function(){
             this.enginePosition=chessGame.chess.fen();

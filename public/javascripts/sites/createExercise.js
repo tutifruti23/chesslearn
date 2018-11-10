@@ -41,7 +41,7 @@ let puzzleSpareHandler={
         chessBoard.board.position(chessBoard.chess.fen());
     },
     update:function(chessGame,chessboardFen){
-        chessGame.chess.load(PositionManipulator.chessboardFenToFen(chessboardFen,settings.getColor(),settings.castling(),'-'));
+        chessGame.chess.load(PositionManipulator.chessboardFenToFen(chessboardFen,settings.getColor(),settings.castling(),settings.getEnpassant()));
     }
 };
 let settings=new Vue({
@@ -60,7 +60,8 @@ let settings=new Vue({
         secondEngineLine:'',
         thirdEngineLine:'',
         level:3,
-        result:'win'
+        result:'win',
+        enpassant:''
     },
     methods: {
          castling: function () {
@@ -119,6 +120,15 @@ let settings=new Vue({
              this.wqCastle=isAllow;
              this.bkCastle=isAllow;
              this.bqCastle=isAllow;
+        },getEnpassant:function () {
+            let res='-';
+            let enp=this.enpassant;
+            if(this.enpassant.length===2
+                && enp.charCodeAt(0)>=97
+                && enp.charCodeAt(0)<105
+                && (settings.color==='w'&&enp.charAt(1)==='6'|| settings.color==='b'&&enp.charAt(1)==='3'))
+                res=enp;
+            return  res;
         }
     },computed:{
 

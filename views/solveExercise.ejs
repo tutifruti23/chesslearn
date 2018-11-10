@@ -18,19 +18,17 @@
     </head>
     <body>
         <% include includes/menu.ejs %>
-        <div class="container content" id="app">
+        <div class="container content" >
             <!-- Portfolio Item Row -->
             <div class="row">
-                <div class="col-3 border d-flex  flex-column justify-content-between p-0">
+                <div class="col-3 border d-flex  flex-column justify-content-between p-0" id="userAndPuzzleData">
                     <div class="d-flex border-bottom flex-column justify-content-between w-100 p-2">
-                        <div>Exercise <span> ?</span></div>
-                        <div>Exercise level: <span>?</span></div>
+                        <div>Exercise <span>{{getExerciseId()}}</span></div>
+                        <div>Exercise level: <span>{{getExerciseLevel()}}</span></div>
                     </div>
                     <div class="d-flex border-top flex-column justify-content-between w-100 p-2">
-                        <div>Your ranking: <span> ?</span></div>
-                        <div>Last repetition : <span>?</span></div>
-                    </div>
 
+                    </div>
                 </div>
                 <div class="col-6 border justify-content-center d-flex  flex-column">
                     <div class="p-2 w-100" >

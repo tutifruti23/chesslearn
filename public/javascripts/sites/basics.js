@@ -1,5 +1,6 @@
 let chessGame=ChessGame('board');
 let guideAndTips,counters;
+let timeout;
 let chapterRewinder=new Vue({
     el:'#left-menu',
     data:{
@@ -11,6 +12,7 @@ let chapterRewinder=new Vue({
         },setData:function(index){
             guideAndTips.setData(data[index]);
         },changeChapter:function(index){
+            clearTimeout(timeout);
             this.selectedItem=index;
             this.setData(index);
             this.chapters[index].method();
@@ -88,7 +90,7 @@ function checkHandler(isCheckingSide){
             if(chessBoard.chess.turn()==='b' || this.numberOfMoves===5 || chessBoard.chess.moves().length<2){
                     this.init(chessBoard);
             }
-            setTimeout(function () {
+            timeout=setTimeout(function () {
                 chessBoard.refresh();
             }, 200);
         }, checkPositionGenerator: function (chess, isCheckingSide) {
@@ -167,7 +169,7 @@ let enPassantHandler={
         this.generatePawns(chessBoard.chess);
         chessBoard.refresh();
         let handler=this;
-        setTimeout(function(){
+        timeout=setTimeout(function(){
             handler.makeFirstMove(chessBoard.chess);
             chessBoard.refresh();
         },500);
@@ -216,7 +218,7 @@ let positionHandler={
     update:function(chessBoard,move){
         this.validate(chessBoard.chess,move);
         let handler=this;
-        setTimeout(
+        timeout=setTimeout(
             function(){handler.init(chessBoard)},500
         );
     },

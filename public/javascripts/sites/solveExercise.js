@@ -35,7 +35,7 @@ let loadRandomExercise=function(){
     $.get(
         '/solveExercise/newRandomExercise',
         function(result){
-            settings.currentPuzzle=result;
+            userAndPuzzleData.exerciseData=result;
             chessGame.setPosition(result.fen);
             settings.playerColor=chessGame.chess.turn();
             NotationMethods.newPosition(settings.listMoves,result.fen);
@@ -84,7 +84,6 @@ let settings=new Vue({
         reviewMode:true,
         playerColor:'',
         lastScore:true,
-        currentPuzzle:{}
     },
     methods:{
         nextPuzzle:function(){
@@ -107,17 +106,20 @@ let settings=new Vue({
             }else{
                 return "img/chesspieces/wikipedia/"+(this.playerColor==='b'?'b':'w')+"R.png";
             }
-        }
+        },
     }
 });
-let exerciseAndUserInfo=new Vue({
-    el:"#exerciseAndUserInfo",
+let userAndPuzzleData=new Vue({
+    el:"#userAndPuzzleData",
     data:{
-        exercise:{},
-        userData:{}
-    },setExerciseId:function(){
 
+        exerciseData:undefined
+    },methods:{
+        getExerciseId:function(){
+            return this.exerciseData===undefined?'?':'#'+this. exerciseData.id;
 
+        },getExerciseLevel:function(){
+            return this.exerciseData===undefined?'?':this. exerciseData.level;
+        }
     }
-
 });
