@@ -151,12 +151,15 @@ let settings=new Vue({
                 );
             }
         },setPosition(pos){
-            if(this.spareMode){
-                switch (pos){
-                    case 'start':chessGame.setPosition(PositionManipulator.getStartFen());break;
-                    case 'empty':chessGame.setPosition(PositionManipulator.getEmptyBoardFen());break;
-                }
+            switch (pos){
+                case 'start':chessGame.setPosition(PositionManipulator.getStartFen());this.setCastles(true);break;
+                case 'empty':chessGame.setPosition(PositionManipulator.getEmptyBoardFen());this.setCastles(false);break;
             }
+        },setCastles:function(isAllow){
+            this.wkCastle=isAllow;
+            this.wqCastle=isAllow;
+            this.bkCastle=isAllow;
+            this.bqCastle=isAllow;
         }
     },computed:{
 

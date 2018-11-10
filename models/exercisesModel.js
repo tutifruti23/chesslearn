@@ -13,7 +13,7 @@ exports.saveExercise=function(exercise,callback){
             let currentId=data['currentId'];
             let exercisesRef= db.collection('exercises').doc();
             transaction.update(sfDocRef, { numberOfExercises: newNumberOfExercises,currentId:currentId+1});
-            transaction.set(exercisesRef,{fen:exercise.fen,id:currentId});
+            transaction.set(exercisesRef,{fen:exercise.fen,id:currentId,result:exercise.result,level:exercise.level});
         });
     }).then(function() {
         callback(true);

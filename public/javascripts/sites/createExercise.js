@@ -14,19 +14,22 @@ let writeLines=function(event){
     }
 };
 function addSuccessInfo(text){
-    $('#login-form-link').removeClass('errorInfo');
-    $(this).addClass('successInfo');
+    let info=$('#info');
+    info.removeClass('errorInfo');
+    info.addClass('successInfo');
     showAndclearInfo(text)
 }
 function addErrorInfo(text){
-    $('#login-form-link').removeClass('successInfo');
-    $(this).addClass('errorInfo');
+    let info=$('#info');
+    info.removeClass('successInfo');
+    info.addClass('errorInfo');
     showAndclearInfo(text)
 }
 function showAndclearInfo(text){
     $('#info').text(text);
-    setTimeout(function(){ $('#info').text(''); }, 7000);
+    setTimeout(function(){ $('#info').text(''); }, 3000);
 }
+
 let engineAnalise=MT.process(getEvent,writeLines);
 
 let callback=async function(event){
@@ -45,17 +48,19 @@ let settings=new Vue({
     el:"#app",
     data:{
         color:'w',
-        wkCastle:true,
-        wqCastle:true,
-        bkCastle:true,
-        bqCastle:true,
+        wkCastle:false,
+        wqCastle:false,
+        bkCastle:false,
+        bqCastle:false,
         spareMode:true,
         engineDepth:15,
         enginePosition:'',
         numberEngineLines:2,
         firstEngineLine:'',
         secondEngineLine:'',
-        thirdEngineLine:''
+        thirdEngineLine:'',
+        level:3,
+        result:'win'
     },
     methods: {
          castling: function () {
@@ -91,6 +96,8 @@ let settings=new Vue({
                 '/createExercise/saveExercise',
                 {
                     fen:chessGame.chess.fen(),
+                    result:this.result,
+                    level:this.level
                 },
                 function(isSaved) {
                     if(isSaved)
@@ -101,12 +108,17 @@ let settings=new Vue({
             );
         },setPosition(pos){
              switch (pos){
-                 case 'start':chessGame.setPosition(PositionManipulator.getStartFen());break;
-                 case 'empty':chessGame.setPosition(PositionManipulator.getEmptyBoardFen());break;
+                 case 'start':chessGame.setPosition(PositionManipulator.getStartFen());this.setCastles(true);break;
+                 case 'empty':chessGame.setPosition(PositionManipulator.getEmptyBoardFen());this.setCastles(false);break;
              }
         },updateFen:function(){
             let chessboardFen=chessGame.board.position();
             chessGame.chess.load(PositionManipulator.chessboardFenToFen(chessboardFen,this.getColor(),this.castling(),'-'));
+        },setCastles:function(isAllow){
+             this.wkCastle=isAllow;
+             this.wqCastle=isAllow;
+             this.bkCastle=isAllow;
+             this.bqCastle=isAllow;
         }
     },computed:{
 
