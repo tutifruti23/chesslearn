@@ -10,26 +10,33 @@ engine.init(function(event){
 });
 let isGameOver=function(lastPlayerMove){
     if(chessGame.chess.game_over() && !settings.reviewMode){
-        console.log(chessGame.chess.in_draw());
-        console.log(chessGame.chess.in_checkmate());
-        changeToReview(true);
+        let score;
+        if(chessGame.chess.in_draw())
+            score=0;
+        else{
+            score=lastPlayerMove?1:-1;
+        }
+
+        let completed=exerciseCompleted(score);
+        changeToReview(completed);
         return true;
     }else{
         return false;
     }
 };
-function puzzleCompleted(result){
+function exerciseCompleted(result){
     let exerciseComplete;
     switch (result){
         case 1:exerciseComplete=true;break;
-        case 0:exerciseComplete=settings.currentPuzzle['expectedScore']>=0;break;
+        case 0:exerciseComplete=userAndPuzzleData.exerciseData.result==='draw';break;
         case -1:exerciseComplete=false;break;
     }
     $.post(
         '/solveExercise/exerciseComplete',{
             isCompleted:exerciseComplete,
         }
-    )
+    );
+    return exerciseComplete;
 }
 let loadRandomExercise=function(){
     $.get(
@@ -97,7 +104,7 @@ let settings=new Vue({
             if(this.reviewMode){
                 return this.lastScore?'Correct!':'Exercise failed';
             }else{
-                return 'Win with '+(this.playerColor==='w'?'white':'black');
+                return  userAndPuzzleData.exerciseData.result +' with '+(this.playerColor==='w'?'white':'black');
             }
 
         },getInfoImagePath(){

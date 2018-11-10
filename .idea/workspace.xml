@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25b488eb-5103-41d4-a47c-cf90e8c7bd17" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/public/javascripts/sites/basics.js" afterPath="$PROJECT_DIR$/public/javascripts/sites/basics.js" />
-      <change beforePath="$PROJECT_DIR$/public/javascripts/sites/createExercise.js" afterPath="$PROJECT_DIR$/public/javascripts/sites/createExercise.js" />
-      <change beforePath="$PROJECT_DIR$/public/javascripts/sites/createPuzzle.js" afterPath="$PROJECT_DIR$/public/javascripts/sites/createPuzzle.js" />
       <change beforePath="$PROJECT_DIR$/public/javascripts/sites/solveExercise.js" afterPath="$PROJECT_DIR$/public/javascripts/sites/solveExercise.js" />
-      <change beforePath="$PROJECT_DIR$/views/createExercise.ejs" afterPath="$PROJECT_DIR$/views/createExercise.ejs" />
+      <change beforePath="$PROJECT_DIR$/routes/solveExercise.js" afterPath="$PROJECT_DIR$/routes/solveExercise.js" />
       <change beforePath="$PROJECT_DIR$/views/solveExercise.ejs" afterPath="$PROJECT_DIR$/views/solveExercise.ejs" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -73,7 +70,7 @@
         <entry file="file://$PROJECT_DIR$/public/javascripts/sites/solvePuzzle.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="545">
-              <caret line="157" column="1" lean-forward="true" selection-start-line="157" selection-start-column="1" selection-end-line="157" selection-end-column="1" />
+              <caret line="157" column="1" lean-forward="false" selection-start-line="157" selection-start-column="1" selection-end-line="157" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -82,18 +79,18 @@
       <file leaf-file-name="createPuzzle.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/sites/createPuzzle.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-321">
-              <caret line="75" column="38" lean-forward="false" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
+            <state relative-caret-position="206">
+              <caret line="93" column="22" lean-forward="false" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="basics.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="basics.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/sites/basics.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="23" lean-forward="false" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+            <state relative-caret-position="442">
+              <caret line="26" column="22" lean-forward="true" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -102,7 +99,7 @@
       <file leaf-file-name="createExercise.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/sites/createExercise.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-968">
+            <state relative-caret-position="171">
               <caret line="43" column="145" lean-forward="false" selection-start-line="43" selection-start-column="145" selection-end-line="43" selection-end-column="145" />
               <folding />
             </state>
@@ -122,18 +119,18 @@
       <file leaf-file-name="solveExercise.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/solveExercise.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="29" lean-forward="false" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+            <state relative-caret-position="170">
+              <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="solveExercise.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="solveExercise.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/sites/solveExercise.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="44" column="2" lean-forward="false" selection-start-line="44" selection-start-column="2" selection-end-line="44" selection-end-column="2" />
+            <state relative-caret-position="206">
+              <caret line="106" column="64" lean-forward="false" selection-start-line="106" selection-start-column="64" selection-end-line="106" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -142,8 +139,8 @@
       <file leaf-file-name="solveExercise.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/solveExercise.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1">
-              <caret line="13" column="74" lean-forward="true" selection-start-line="13" selection-start-column="74" selection-end-line="13" selection-end-column="74" />
+            <state relative-caret-position="51">
+              <caret line="12" column="76" lean-forward="false" selection-start-line="12" selection-start-column="76" selection-end-line="12" selection-end-column="76" />
               <folding />
             </state>
           </provider>
@@ -152,7 +149,7 @@
       <file leaf-file-name="createPuzzle.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/createPuzzle.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
+            <state relative-caret-position="1581">
               <caret line="93" column="54" lean-forward="false" selection-start-line="93" selection-start-column="51" selection-end-line="93" selection-end-column="54" />
               <folding />
             </state>
@@ -163,7 +160,7 @@
         <entry file="file://$PROJECT_DIR$/views/solvePuzzle.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="154">
-              <caret line="22" column="16" lean-forward="true" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="113" />
+              <caret line="22" column="16" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="113" />
               <folding />
             </state>
           </provider>
@@ -210,8 +207,8 @@
       <find>console.lo</find>
       <find>cu</find>
       <find>solve</find>
-      <find>console</find>
       <find>setT</find>
+      <find>console</find>
     </findStrings>
     <replaceStrings>
       <replace>let</replace>
@@ -240,7 +237,6 @@
         <option value="$PROJECT_DIR$/routes/createPuzzle.js" />
         <option value="$PROJECT_DIR$/public/javascripts/libraries/engine.js" />
         <option value="$PROJECT_DIR$/controllers/exerciseController.js" />
-        <option value="$PROJECT_DIR$/routes/solveExercise.js" />
         <option value="$PROJECT_DIR$/public/javascripts/libraries/PositionManipulator.js" />
         <option value="$PROJECT_DIR$/public/javascripts/data/basics.json" />
         <option value="$PROJECT_DIR$/public/stylesheets/basics.css" />
@@ -274,12 +270,13 @@
         <option value="$PROJECT_DIR$/public/javascripts/libraries/chessBoardEvents.js" />
         <option value="$PROJECT_DIR$/routes/createExercise.js" />
         <option value="$PROJECT_DIR$/models/exercisesModel.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/sites/solveExercise.js" />
-        <option value="$PROJECT_DIR$/views/solveExercise.ejs" />
         <option value="$PROJECT_DIR$/public/javascripts/sites/createExercise.js" />
         <option value="$PROJECT_DIR$/views/createExercise.ejs" />
         <option value="$PROJECT_DIR$/public/javascripts/sites/createPuzzle.js" />
         <option value="$PROJECT_DIR$/public/javascripts/sites/basics.js" />
+        <option value="$PROJECT_DIR$/routes/solveExercise.js" />
+        <option value="$PROJECT_DIR$/views/solveExercise.ejs" />
+        <option value="$PROJECT_DIR$/public/javascripts/sites/solveExercise.js" />
       </list>
     </option>
   </component>
@@ -726,12 +723,12 @@
       <workItem from="1541705058021" duration="11182000" />
       <workItem from="1541759099645" duration="10009000" />
       <workItem from="1541784417294" duration="8768000" />
-      <workItem from="1541845757760" duration="15336000" />
+      <workItem from="1541845757760" duration="17357000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="390422000" />
+    <option name="totallyTimeSpent" value="392443000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1149,50 +1146,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/solveExercise.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/sites/basics.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="29" lean-forward="false" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/sites/solvePuzzle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="157" column="1" lean-forward="true" selection-start-line="157" selection-start-column="1" selection-end-line="157" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/sites/solveExercise.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="44" column="2" lean-forward="false" selection-start-line="44" selection-start-column="2" selection-end-line="44" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/solvePuzzle.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="22" column="16" lean-forward="true" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="113" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/sites/createExercise.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-968">
-          <caret line="43" column="145" lean-forward="false" selection-start-line="43" selection-start-column="145" selection-end-line="43" selection-end-column="145" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/solveExercise.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1">
-          <caret line="13" column="74" lean-forward="true" selection-start-line="13" selection-start-column="74" selection-end-line="13" selection-end-column="74" />
+        <state relative-caret-position="442">
+          <caret line="26" column="22" lean-forward="true" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -1207,24 +1164,64 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/createPuzzle.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
+        <state relative-caret-position="1581">
           <caret line="93" column="54" lean-forward="false" selection-start-line="93" selection-start-column="51" selection-end-line="93" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/solvePuzzle.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="22" column="16" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="113" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/sites/solvePuzzle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="545">
+          <caret line="157" column="1" lean-forward="false" selection-start-line="157" selection-start-column="1" selection-end-line="157" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/sites/createExercise.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="43" column="145" lean-forward="false" selection-start-line="43" selection-start-column="145" selection-end-line="43" selection-end-column="145" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/solveExercise.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/solveExercise.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="12" column="76" lean-forward="false" selection-start-line="12" selection-start-column="76" selection-end-line="12" selection-end-column="76" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/sites/createPuzzle.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-321">
-          <caret line="75" column="38" lean-forward="false" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
+        <state relative-caret-position="206">
+          <caret line="93" column="22" lean-forward="false" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/sites/basics.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/sites/solveExercise.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="23" lean-forward="false" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+        <state relative-caret-position="206">
+          <caret line="106" column="64" lean-forward="false" selection-start-line="106" selection-start-column="64" selection-end-line="106" selection-end-column="64" />
           <folding />
         </state>
       </provider>
