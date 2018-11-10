@@ -209,6 +209,32 @@ let enPassantHandler={
         chess.move(move);
     }
 };
+let pawnPromotionHandler={
+    init:function(chessBoard){
+
+        this.generatePawns(chessBoard.chess);
+        chessBoard.refresh();
+
+
+    },
+    update:function(chessBoard,move){
+        counters.increaseCounter(move.flags.includes('p'));
+        this.init(chessBoard);
+    },
+    generatePawns:function(chess){
+        chess.clear();
+
+        for(let i=0;i<4;i++){
+            let letter=String.fromCharCode(Math.floor(Math.random()*8)+97);
+            chess.put({type:'p',color:'w'},letter+'7');
+        }
+        let letter;
+        letter=String.fromCharCode(Math.floor(Math.random()*8)+97);
+        chess.put({type:'p',color:'w'},letter+'4');
+        letter=String.fromCharCode(Math.floor(Math.random()*8)+97);
+        chess.put({type:'p',color:'w'},letter+'6');
+    },
+};
 let positionHandler={
     init:function (chessBoard) {
         let pos=guideAndTips.positions[Math.floor(Math.random()*guideAndTips.positions.length)];

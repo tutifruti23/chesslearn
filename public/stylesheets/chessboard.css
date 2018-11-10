@@ -12,7 +12,19 @@
 .clearfix-7da63 {
   clear: both;
 }
+/* promotion */
+.promotionDialog {
+  position: absolute;
+  background-color: gray;
+  opacity: 0.9;
+}.promotionPiece{
+  width:80px;
+  height: 80px;
 
+}
+ .promotionPiece:hover{
+   cursor: pointer;
+ }
 /* board */
 .board-b72b1 {
   border: 2px solid #404040;

@@ -9,17 +9,28 @@ function  gameMode(chessGame,isAllowOnlyOneSideMode,noOverMode){
         }
     };
     let onDrop = function(source, target) {
-        // see if the move is legal
         let move = chessGame.chess.move({
             from: source,
             to: target,
             promotion: 'q' // NOTE: always promote to a queen for example simplicity
         });
-        // illegal move
         if (move === null) return 'snapback';
-        chessGame.handlerUpdate(move);
-    };
+        if(move.flags.includes('p')){
+            chessGame.chess.undo();
+            promotionDialog(chessGame,function(piece){
+                move = chessGame.chess.move({
+                    from: source,
+                    to: target,
+                    promotion: piece // NOTE: always promote to a queen for example simplicity
+                });
+                chessGame.refresh();
+                chessGame.handlerUpdate(move);
+            });
 
+        }else{
+            chessGame.handlerUpdate(move);
+        }
+    };
 // update the board position after the piece snap
 // for castling, en passant, pawn promotion
     let onSnapEnd = function() {
@@ -68,8 +79,19 @@ function oneColorMovesMode(chessGame){
             to: target,
             promotion: 'q' // NOTE: always promote to a queen for example simplicity
         });
-        // illegal move
         if (move === null) return 'snapback';
+        if(move.flags.includes('p')){
+            chessGame.chess.undo();
+            promotionDialog(chessGame,function(piece){
+                move = chessGame.chess.move({
+                    from: source,
+                    to: target,
+                    promotion: piece // NOTE: always promote to a queen for example simplicity
+                });
+
+                PositionManipulator.changeSideOnMove(chessGame.chess);
+            });
+        }
         else{
             PositionManipulator.changeSideOnMove(chessGame.chess);
         }
@@ -121,12 +143,24 @@ function oneColorMovesModeWithoutKingControl(){
                 to: target,
                 promotion: 'q' // NOTE: always promote to a queen for example simplicity
             });
-            // illegal move
             if (move === null) return 'snapback';
-            else{
+            if(move.flags.includes('p')){
+                chessGame.chess.undo();
+                promotionDialog(chessGame,function(piece){
+                    move = chessGame.chess.move({
+                        from: source,
+                        to: target,
+                        promotion: piece // NOTE: always promote to a queen for example simplicity
+                    });
+                    chessGame.refresh();
+                    PositionManipulator.changeSideOnMove(chessGame.chess);
+                    chessGame.handlerUpdate(move);
+                });
+            }else{
                 PositionManipulator.changeSideOnMove(chessGame.chess);
                 chessGame.handlerUpdate(move);
             }
+
         }
     };
 // update the board position after the piece snap
@@ -175,8 +209,22 @@ function engineMode(chessGame){
         });
         // illegal move
         if (move === null) return 'snapback';
+        if(move.flags.includes('p')){
+            chessGame.chess.undo();
+            promotionDialog(chessGame,function(piece){
+                move = chessGame.chess.move({
+                    from: source,
+                    to: target,
+                    promotion: piece // NOTE: always promote to a queen for example simplicity
+                });
+                chessGame.refresh();
+                window.setTimeout(makeRandomMove, 100);
+            });
+        }else{
+            window.setTimeout(makeRandomMove, 100);
+        }
         // make random legal move for black
-        window.setTimeout(makeRandomMove, 100);
+
     };
 
 // update the board position after the piece snap
@@ -211,6 +259,7 @@ function puzzleMode(chessGame){
         });
         // illegal move
         if (move === null) return 'snapback';
+
     };
 
 // update the board position after the piece snap
@@ -230,3 +279,29 @@ function noOverMode(chessGame){
     return gameMode(chessGame,false,true);
 
 }
+let  promotionDialog=function(chessGame,callback){
+    function createPieceElem(piece,color){
+        let $elem=$( '<div class="p-2  promotionPiece"><img class="align-middle img-thumbnail " src="images/chesspieces/wikipedia/'+color+piece+'.png"/></div>');
+        $elem.on('click',function () {
+            callback(piece);
+            elem.remove();
+        });
+        return $elem ;
+    }
+    let id=chessGame.boardId;
+    let $parent=$('#'+id).parent();
+    let width=$parent.width();
+    let color=chessGame.chess.turn();
+    let $flex=$('<div class="d-flex justify-content-center"></div>');
+    $flex.append(createPieceElem('q',color));
+    $flex.append(createPieceElem('r',color));
+    $flex.append(createPieceElem('b',color));
+    $flex.append(createPieceElem('n',color));
+    let elem=$('<div class="promotionDialog container">' +
+        '</div>');
+    elem.append($flex);
+    elem.width(width);
+    elem.height(width);
+    elem.css({marginTop:-width});
+    $parent.append(elem);
+};

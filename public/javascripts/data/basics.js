@@ -140,7 +140,10 @@ let chapters=[
     },
     {
         name:"Pawn promotion",
-            method:function(){}
+            method:function(){
+                chessGame.setHandler(pawnPromotionHandler);
+                chessGame.setMode(noOverMode);
+            }
     },
     {
         name:"Check",
