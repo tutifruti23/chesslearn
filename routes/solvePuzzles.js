@@ -7,8 +7,12 @@ let userController=require('../controllers/userController');
 router.get('/', function(req, res, next) {
     res.render('solvePuzzle', { title: 'Express' });
 });
-router.get('/newRandomPuzzle', function(req, res, next) {
+router.post('/newRandomPuzzle', function(req, res, next) {
    puzzleController.getRandomPuzzle(req,res);
+});
+router.post('/newPuzzleUser', function(req, res, next) {
+
+    puzzleController.getPuzzleForUser(req,res);
 });
 router.post('/solvePuzzle',function(req,res){
     solvePuzzleController.solvePuzzle(req,res);

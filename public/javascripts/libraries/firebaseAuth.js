@@ -36,6 +36,8 @@ function setDataWithToken(callback){
         }).catch(function(error) {
             // Handle error
         });
+    }else{
+        callback(null);
     }
 }
 

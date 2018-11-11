@@ -14,7 +14,7 @@ exports.solvePuzzle=function(req,res){
                     });
                 }
             });
-        })
-
+        });
+        userModel.addUserSolvePuzzle(userId,data.docId);
     });
 };

@@ -1,14 +1,23 @@
-let loadRandomPuzzle=function(){
-    $.get(
-        '/solvePuzzle/newRandomPuzzle',
-        function(result){
-            userAndPuzzleData.puzzleData=result;
-            changeToPuzzleMode();
-           chessGame.setPosition(result.fen);
-           NotationMethods.arrayMovesToListMoves(result.fen,settings.listMoves,result.solution);
-           settings.playerColor=chessGame.chess.turn();
-        }
-    );
+let loadPuzzle=function(){
+
+    setDataWithToken(function(token){
+
+        let path=token===null?'/solvePuzzle/newRandomPuzzle':'/solvePuzzle/newPuzzleUser';
+        $.post(
+            path,{
+                token:token
+            },
+            function(result){
+                userAndPuzzleData.puzzleData=result;
+                changeToPuzzleMode();
+                chessGame.setPosition(result.fen);
+                NotationMethods.arrayMovesToListMoves(result.fen,settings.listMoves,result.solution);
+                settings.playerColor=chessGame.chess.turn();
+            }
+        );
+
+    });
+
 };
 let setScore=function(score){
     setDataWithToken(function(token){
@@ -121,7 +130,7 @@ let settings=new Vue({
     },
     methods:{
         nextPuzzle:function(){
-            loadRandomPuzzle()
+            loadPuzzle()
         },
         getListMoves:function(){
             return this.listMoves.getNotation();

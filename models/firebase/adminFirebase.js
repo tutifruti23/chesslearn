@@ -1,4 +1,5 @@
 let admin = require("firebase-admin");
+exports.FieldValue = admin.firestore.FieldValue;
 let serviceAccount = require("./service2.json");
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
