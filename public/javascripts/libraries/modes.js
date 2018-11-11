@@ -281,7 +281,7 @@ function noOverMode(chessGame){
 }
 let  promotionDialog=function(chessGame,callback){
     function createPieceElem(piece,color){
-        let $elem=$( '<div class="p-2  promotionPiece"><img class="align-middle img-thumbnail " src="images/chesspieces/wikipedia/'+color+piece+'.png"/></div>');
+        let $elem=$( '<div class="p-2  promotionPiece"><img class="align-middle img-thumbnail " src="images/chesspieces/wikipedia/'+color+piece.toUpperCase()+'.png"/></div>');
         $elem.on('click',function () {
             callback(piece);
             elem.remove();
@@ -293,10 +293,10 @@ let  promotionDialog=function(chessGame,callback){
     let width=$parent.width();
     let color=chessGame.chess.turn();
     let $flex=$('<div class="d-flex justify-content-center"></div>');
-    $flex.append(createPieceElem('Q',color));
-    $flex.append(createPieceElem('R',color));
-    $flex.append(createPieceElem('B',color));
-    $flex.append(createPieceElem('N',color));
+    $flex.append(createPieceElem('q',color));
+    $flex.append(createPieceElem('r',color));
+    $flex.append(createPieceElem('b',color));
+    $flex.append(createPieceElem('n',color));
     let elem=$('<div class="promotionDialog container">' +
         '</div>');
     elem.append($flex);
