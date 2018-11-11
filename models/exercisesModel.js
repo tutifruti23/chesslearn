@@ -1,5 +1,10 @@
 let db=require('./firebase/adminFirebase').db;
 
+let addNewExercise=function(userId,exerciseId){
+    db.collection('users').doc(userId).collection('puzzles')
+};
+
+
 exports.saveExercise=function(exercise,callback){
     let sfDocRef = db.collection("metaData").doc("exercise");
     db.runTransaction(function(transaction) {

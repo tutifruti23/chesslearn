@@ -293,10 +293,10 @@ let  promotionDialog=function(chessGame,callback){
     let width=$parent.width();
     let color=chessGame.chess.turn();
     let $flex=$('<div class="d-flex justify-content-center"></div>');
-    $flex.append(createPieceElem('q',color));
-    $flex.append(createPieceElem('r',color));
-    $flex.append(createPieceElem('b',color));
-    $flex.append(createPieceElem('n',color));
+    $flex.append(createPieceElem('Q',color));
+    $flex.append(createPieceElem('R',color));
+    $flex.append(createPieceElem('B',color));
+    $flex.append(createPieceElem('N',color));
     let elem=$('<div class="promotionDialog container">' +
         '</div>');
     elem.append($flex);
