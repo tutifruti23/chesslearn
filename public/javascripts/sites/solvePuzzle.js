@@ -155,13 +155,14 @@ let settings=new Vue({
         }
     }
 });
+let userController={
+    initInfo:function(){
+        setDataWithToken(function (token) {
+            getUserRating(token);
+        });
+    },
+    logout:function(){
 
-
-function initInfo(){
-    setDataWithToken(function (token) {
-        getUserRating(token);
-    })
-}
-function logout(){
-    userAndPuzzleData.rating='?';
-}
+        userAndPuzzleData.rating='?';
+    }
+};

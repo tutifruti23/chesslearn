@@ -22,9 +22,35 @@ exports.addUserSolvePuzzle=function(userId,puzzleDocId){
         console.log(error);
     });
 };
+exports.addUserExercise=function(userId,exerciseDocId){
+    let ref= db.collection('users').doc(userId);
+    ref.collection('exercises').doc(exerciseDocId).set({
+        box:1,
+        nextAttempt:new Date()
+    });
+
+    ref.update({
+        exercises: FieldValue.arrayUnion(exerciseDocId)
+    }).then(function(){
+
+    }).catch(function (error) {
+        console.log(error);
+    });
+};
 exports.getUserRatingAndLastPuzzles=function(userId,callback){
     db.collection('users').doc(userId).get().then(function(doc){
         let data=doc.data();
         callback(data.rating,data.lastPuzzles);
+    });
+};
+exports.getUserExercises=function(userId,callback){
+    db.collection('users').doc(userId).get().then(function(doc){
+        let data=doc.data();
+        callback(data.exercises);
+    });
+};
+exports.getUserData=function(userId,parameters,callback){
+    db.collection('users').doc(userId).get().then(function(doc){
+        callback(doc.data());
     });
 };

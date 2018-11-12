@@ -31,24 +31,43 @@ function exerciseCompleted(result){
         case 0:exerciseComplete=userAndPuzzleData.exerciseData.result==='draw';break;
         case -1:exerciseComplete=false;break;
     }
-    $.post(
-        '/solveExercise/exerciseComplete',{
-            isCompleted:exerciseComplete,
+    console.log('koniec');
+    console.log(userAndPuzzleData.exerciseData);
+    setDataWithToken(function(token){
+        if(token!==null){
+            $.post(
+                '/solveExercise/exerciseComplete',{
+                    isGood:exerciseComplete,
+                    token:token,
+                    docId:userAndPuzzleData.exerciseData.docId
+                },function(isOk){
+
+                }
+            );
         }
-    );
+    });
     return exerciseComplete;
 }
-let loadRandomExercise=function(){
-    $.get(
-        '/solveExercise/newRandomExercise',
-        function(result){
-            userAndPuzzleData.exerciseData=result;
-            chessGame.setPosition(result.fen);
-            settings.playerColor=chessGame.chess.turn();
-            NotationMethods.newPosition(settings.listMoves,result.fen);
-            changeToExerciseMode();
-        }
-    );
+let loadExercise=function(){
+    setDataWithToken(function(token){
+        let path=token===null?'/solveExercise/newRandomExercise':'/solveExercise/newExerciseUser';
+        if(userAndPuzzleData)
+            $.post(
+                path
+                ,{
+                    token:token
+                },
+                function(result){
+                    userAndPuzzleData.exerciseData=result;
+                    chessGame.setPosition(result.fen);
+                    settings.playerColor=chessGame.chess.turn();
+                    NotationMethods.newPosition(settings.listMoves,result.fen);
+                    changeToExerciseMode();
+                }
+            );
+    });
+
+
 };
 let exerciseHandler={
     init:function(){},
@@ -94,11 +113,12 @@ let settings=new Vue({
     },
     methods:{
         nextPuzzle:function(){
-            loadRandomExercise();
+            loadExercise();
         },
         getListMoves:function(){
             return this.reviewMode?this.listMoves.getNotation():this.listMoves.getRawNotation();
         },giveUp:function(){
+            exerciseCompleted(-1);
             changeToReview(false);
         },getInfoText:function(){
             if(this.reviewMode){
@@ -119,7 +139,7 @@ let settings=new Vue({
 let userAndPuzzleData=new Vue({
     el:"#userAndPuzzleData",
     data:{
-
+        userLogin:false,
         exerciseData:undefined
     },methods:{
         getExerciseId:function(){
@@ -130,3 +150,14 @@ let userAndPuzzleData=new Vue({
         }
     }
 });
+let userController={
+    initInfo:function(){
+
+        setDataWithToken(function (token) {
+
+        })
+    },
+    logout:function(){
+
+    }
+};

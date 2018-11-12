@@ -54,8 +54,6 @@ exports.getRandomPuzzle=function(callback){
         });
 };
 exports.getPuzzleForPlayer=function(rating,solvedPuzzles,callback){
-    console.log(rating);
-    console.log(solvedPuzzles);
     let random=randomInt(maxInt);
     function checkDocs(snapshot){
         let size=snapshot.size;
@@ -85,10 +83,9 @@ exports.getPuzzleForPlayer=function(rating,solvedPuzzles,callback){
         console.log('no documents');
 
     });
-
-
-
 };
+
+
 
 
 

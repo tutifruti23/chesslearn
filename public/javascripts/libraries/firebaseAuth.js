@@ -3,9 +3,9 @@ firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         userData=user;
         displayUserData(user);
-        initInfo();
+        userController.initInfo();
     } else {
-        logout();
+        userController.logout();
     }
 });
 function displayUserData(user){
@@ -24,7 +24,7 @@ function signOut(){
     firebase.auth().signOut().then(function() {
         displayUserData();
         userData=undefined;
-        logout();
+        userController.logout();
     }, function(error) {
         // An error happened.
     });
