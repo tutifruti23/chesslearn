@@ -16,23 +16,22 @@ let isGameOver=function(lastPlayerMove){
         else{
             score=lastPlayerMove?1:-1;
         }
-
-        let completed=exerciseCompleted(score);
-        changeToReview(completed);
+        exerciseCompleted(score,function(completed){
+            changeToReview(completed);
+        });
         return true;
     }else{
         return false;
     }
 };
-function exerciseCompleted(result){
+function exerciseCompleted(result,callback){
+    settings.loading=true;
     let exerciseComplete;
     switch (result){
         case 1:exerciseComplete=true;break;
         case 0:exerciseComplete=userAndPuzzleData.exerciseData.result==='draw';break;
         case -1:exerciseComplete=false;break;
     }
-    console.log('koniec');
-    console.log(userAndPuzzleData.exerciseData);
     setDataWithToken(function(token){
         if(token!==null){
             $.post(
@@ -41,9 +40,13 @@ function exerciseCompleted(result){
                     token:token,
                     docId:userAndPuzzleData.exerciseData.docId
                 },function(isOk){
-
+                    callback(exerciseComplete);
+                    settings.loading=false;
                 }
             );
+        }else{
+            settings.loading=false;
+            callback(exerciseComplete);
         }
     });
     return exerciseComplete;
@@ -58,11 +61,15 @@ let loadExercise=function(){
                     token:token
                 },
                 function(result){
-                    userAndPuzzleData.exerciseData=result;
-                    chessGame.setPosition(result.fen);
-                    settings.playerColor=chessGame.chess.turn();
-                    NotationMethods.newPosition(settings.listMoves,result.fen);
-                    changeToExerciseMode();
+                    if(result){
+                        userAndPuzzleData.exerciseData=result;
+                        chessGame.setPosition(result.fen);
+                        settings.playerColor=chessGame.chess.turn();
+                        NotationMethods.newPosition(settings.listMoves,result.fen);
+                        changeToExerciseMode();
+                    }else{
+
+                    }
                 }
             );
     });
@@ -110,6 +117,7 @@ let settings=new Vue({
         reviewMode:true,
         playerColor:'',
         lastScore:true,
+        loading:false
     },
     methods:{
         nextPuzzle:function(){
@@ -118,8 +126,9 @@ let settings=new Vue({
         getListMoves:function(){
             return this.reviewMode?this.listMoves.getNotation():this.listMoves.getRawNotation();
         },giveUp:function(){
-            exerciseCompleted(-1);
-            changeToReview(false);
+            exerciseCompleted(-1,function(){
+                changeToReview(false);
+            });
         },getInfoText:function(){
             if(this.reviewMode){
                 return this.lastScore?'Correct!':'Exercise failed';

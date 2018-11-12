@@ -5,6 +5,7 @@
         <link rel='stylesheet' href='stylesheets/chessboard.css' />
         <link href="stylesheets/portfolio-item.css" rel="stylesheet"/>
         <link href="stylesheets/notation.css" rel="stylesheet"/>
+        <link href="stylesheets/solveExercises.css" rel="stylesheet"/>
         <script src="javascripts/libraries/modes.js"></script>
         <script src="javascripts/libraries/jquery.js"></script>
         <script src="javascripts/libraries/chessboard.js"></script>
@@ -35,11 +36,17 @@
                     </div>
                 </div>
                 <div id="settings" class="col-3 border justify-content-between d-flex  flex-column">
-                    <div class="row notation h-50">
+                    <div class="row notation h-25">
                         <div class="col">
                             <div id="notation" v-html="getListMoves()">
                             </div>
                         </div>
+                    </div>
+                    <div class="h-25 d-flex justify-content-center" >
+                        <div class="w-50 h-50 " v-if="loading">
+                            <div class="loader "></div>
+                        </div>
+
                     </div>
                     <div class="row h-25" v-if="playerColor!==''">
                         <div class="col-3 p-1 h-50 w-25 m-auto">

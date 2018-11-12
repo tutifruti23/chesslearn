@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25b488eb-5103-41d4-a47c-cf90e8c7bd17" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/controllers/exerciseController.js" afterPath="$PROJECT_DIR$/controllers/exerciseController.js" />
-      <change beforePath="$PROJECT_DIR$/controllers/solveExerciseContrroler.js" afterPath="$PROJECT_DIR$/controllers/solveExerciseContrroler.js" />
-      <change beforePath="$PROJECT_DIR$/models/exercisesModel.js" afterPath="$PROJECT_DIR$/models/exercisesModel.js" />
-      <change beforePath="$PROJECT_DIR$/models/puzzlesModel.js" afterPath="$PROJECT_DIR$/models/puzzlesModel.js" />
-      <change beforePath="$PROJECT_DIR$/models/solveExerciseModel.js" afterPath="$PROJECT_DIR$/models/solveExerciseModel.js" />
-      <change beforePath="$PROJECT_DIR$/models/userModel.js" afterPath="$PROJECT_DIR$/models/userModel.js" />
-      <change beforePath="$PROJECT_DIR$/public/javascripts/libraries/firebaseAuth.js" afterPath="$PROJECT_DIR$/public/javascripts/libraries/firebaseAuth.js" />
       <change beforePath="$PROJECT_DIR$/public/javascripts/sites/solveExercise.js" afterPath="$PROJECT_DIR$/public/javascripts/sites/solveExercise.js" />
-      <change beforePath="$PROJECT_DIR$/public/javascripts/sites/solvePuzzle.js" afterPath="$PROJECT_DIR$/public/javascripts/sites/solvePuzzle.js" />
-      <change beforePath="$PROJECT_DIR$/routes/solveExercise.js" afterPath="$PROJECT_DIR$/routes/solveExercise.js" />
-      <change beforePath="$PROJECT_DIR$/views/createPuzzle.ejs" afterPath="$PROJECT_DIR$/views/createPuzzle.ejs" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/createPuzzleAndExercise.css" afterPath="$PROJECT_DIR$/public/stylesheets/createPuzzleAndExercise.css" />
+      <change beforePath="$PROJECT_DIR$/views/solveExercise.ejs" afterPath="$PROJECT_DIR$/views/solveExercise.ejs" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -75,11 +66,51 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="solveExercise.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="solveExercise.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/sites/solveExercise.js">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="33" column="5" lean-forward="false" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="solvePuzzle.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/solvePuzzle.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-34">
+              <caret line="22" column="16" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="113" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="solveExercise.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/solveExercise.ejs">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
-              <caret line="34" column="48" lean-forward="false" selection-start-line="34" selection-start-column="48" selection-end-line="34" selection-end-column="48" />
+              <caret line="46" column="55" lean-forward="true" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="createPuzzleAndExercise.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/stylesheets/createPuzzleAndExercise.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="solveExercises.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/stylesheets/solveExercises.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -89,7 +120,7 @@
         <entry file="file://$PROJECT_DIR$/routes/solveExercise.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="33" lean-forward="true" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
+              <caret line="0" column="33" lean-forward="false" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -99,57 +130,37 @@
         <entry file="file://$PROJECT_DIR$/models/userModel.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="432">
-              <caret line="47" column="28" lean-forward="true" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
+              <caret line="47" column="28" lean-forward="false" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="solveExerciseContrroler.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/solveExerciseContrroler.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="exercisesModel.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/exercisesModel.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="32" column="9" lean-forward="true" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="solveExerciseModel.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="solveExerciseModel.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/solveExerciseModel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
+            <state relative-caret-position="601">
               <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="solvePuzzleController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/solvePuzzleController.js">
+      <file leaf-file-name="adminFirebase.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/firebase/adminFirebase.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="54" lean-forward="false" selection-start-line="2" selection-start-column="54" selection-end-line="2" selection-end-column="54" />
+            <state relative-caret-position="17">
+              <caret line="1" column="26" lean-forward="false" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="exerciseController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/exerciseController.js">
+      <file leaf-file-name="service2.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/firebase/service2.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="22" lean-forward="true" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -161,15 +172,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>'w'</find>
-      <find>this.current=</find>
       <find>variant</find>
       <find>nowy</find>
       <find>consolelo</find>
@@ -198,6 +207,8 @@
       <find>init</find>
       <find>load</find>
       <find>conso</find>
+      <find>isGame</find>
+      <find>exerciseCompleted</find>
     </findStrings>
     <replaceStrings>
       <replace>let</replace>
@@ -215,7 +226,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/public/javascripts/libraries/Notation.js" />
         <option value="$PROJECT_DIR$/views/createExercise.js" />
         <option value="$PROJECT_DIR$/views/solveExercise.ejs.js" />
         <option value="$PROJECT_DIR$/routes/createPuzzle.js" />
@@ -239,13 +249,11 @@
         <option value="$PROJECT_DIR$/controllers/userController.js" />
         <option value="$PROJECT_DIR$/models/solvePuzzleModel.js" />
         <option value="$PROJECT_DIR$/views/solvePuzzle.ejs" />
-        <option value="$PROJECT_DIR$/public/stylesheets/createPuzzleAndExercise.css" />
         <option value="$PROJECT_DIR$/public/javascripts/libraries/chessBoardEvents.js" />
         <option value="$PROJECT_DIR$/routes/createExercise.js" />
         <option value="$PROJECT_DIR$/public/javascripts/sites/createExercise.js" />
         <option value="$PROJECT_DIR$/views/createExercise.ejs" />
         <option value="$PROJECT_DIR$/public/javascripts/sites/createPuzzle.js" />
-        <option value="$PROJECT_DIR$/views/solveExercise.ejs" />
         <option value="$PROJECT_DIR$/public/stylesheets/chessboard.css" />
         <option value="$PROJECT_DIR$/public/javascripts/data/basics.js" />
         <option value="$PROJECT_DIR$/public/javascripts/sites/basics.js" />
@@ -262,10 +270,13 @@
         <option value="$PROJECT_DIR$/models/puzzlesModel.js" />
         <option value="$PROJECT_DIR$/controllers/solvePuzzleController.js" />
         <option value="$PROJECT_DIR$/routes/solveExercise.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/sites/solveExercise.js" />
         <option value="$PROJECT_DIR$/models/exercisesModel.js" />
         <option value="$PROJECT_DIR$/controllers/solveExerciseContrroler.js" />
         <option value="$PROJECT_DIR$/models/solveExerciseModel.js" />
+        <option value="$PROJECT_DIR$/public/stylesheets/createPuzzleAndExercise.css" />
+        <option value="$PROJECT_DIR$/public/stylesheets/solveExercises.css" />
+        <option value="$PROJECT_DIR$/views/solveExercise.ejs" />
+        <option value="$PROJECT_DIR$/public/javascripts/sites/solveExercise.js" />
       </list>
     </option>
   </component>
@@ -446,6 +457,12 @@
               <item name="public" type="462c0819:PsiDirectoryNode" />
               <item name="javascripts" type="462c0819:PsiDirectoryNode" />
               <item name="sites" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Praca Inzynierska" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Praca Inzynierska" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="stylesheets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Praca Inzynierska" type="b2602c69:ProjectViewProjectNode" />
@@ -690,12 +707,12 @@
       <workItem from="1541881421243" duration="8346000" />
       <workItem from="1541935226192" duration="16687000" />
       <workItem from="1541967196541" duration="11689000" />
-      <workItem from="1542014927226" duration="6313000" />
+      <workItem from="1542014927226" duration="9282000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="442829000" />
+    <option name="totallyTimeSpent" value="445798000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -792,20 +809,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/controllers/loginController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="47" lean-forward="false" selection-start-line="0" selection-start-column="47" selection-end-line="0" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/pgnParser.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="35" lean-forward="false" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/libraries/engine.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -866,21 +869,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="46" lean-forward="false" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/stylesheets/createPuzzleAndExercise.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="35" lean-forward="false" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/solvePuzzle.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="22" column="16" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="113" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -950,14 +938,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/solveExercise.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="76" lean-forward="false" selection-start-line="12" selection-start-column="76" selection-end-line="12" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/libraries/modes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -1018,13 +998,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/firebase/adminFirebase.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="26" lean-forward="false" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -1118,30 +1091,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/solveExercise.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="33" lean-forward="true" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/sites/solveExercise.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="34" column="48" lean-forward="false" selection-start-line="34" selection-start-column="48" selection-end-line="34" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/userModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="47" column="28" lean-forward="true" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/solveExerciseContrroler.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1153,7 +1102,7 @@
     <entry file="file://$PROJECT_DIR$/models/exercisesModel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
-          <caret line="32" column="9" lean-forward="true" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
+          <caret line="32" column="9" lean-forward="false" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -1161,7 +1110,7 @@
     <entry file="file://$PROJECT_DIR$/controllers/exerciseController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="14" column="22" lean-forward="true" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+          <caret line="14" column="22" lean-forward="false" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -1176,8 +1125,80 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/solveExerciseModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
+        <state relative-caret-position="601">
           <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/firebase/adminFirebase.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="26" lean-forward="false" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/firebase/service2.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/userModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="47" column="28" lean-forward="false" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/solveExercise.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="33" lean-forward="false" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/createPuzzleAndExercise.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/solveExercises.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/solvePuzzle.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-34">
+          <caret line="22" column="16" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="113" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/solveExercise.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="46" column="55" lean-forward="true" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/sites/solveExercise.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="33" column="5" lean-forward="false" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
           <folding />
         </state>
       </provider>
