@@ -1,13 +1,16 @@
 let userData;
-var userController;
-firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-        userData=user;
-        displayUserData(user);
-        userController.initInfo();
-    } else {
-        userController.logout();
-    }
+let userController;
+$(function(){
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            userData=user;
+            displayUserData(user);
+            userController.initInfo();
+        } else {
+            userController.logout();
+        }
+    });
 });
 function displayUserData(user){
     if(user){
