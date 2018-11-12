@@ -15,12 +15,14 @@ exports.solveExerciseUser=function(userId,isGood,exerciseDocId,callback){
             let data=sfDoc.data();
             let box=data.box;
             let nextBox;
+            let attempts=data.attempts;
+            if(attempts===undefined)
+                attempts=0;
             if(isGood==='true'){
                 nextBox=box===5?5:box+1;
             }
             else{
                 nextBox=1;
-
             }
             let nextRepeatDays;
             switch (nextBox){
@@ -32,7 +34,7 @@ exports.solveExerciseUser=function(userId,isGood,exerciseDocId,callback){
             }
             let date=new Date();
             let nextRepeatDate=addDays(date,nextRepeatDays);
-            transaction.update(sfDocRef,{nextAttempt:nextRepeatDate,box:nextBox});
+            transaction.update(sfDocRef,{nextAttempt:nextRepeatDate,box:nextBox,attempts:attempts+1,lastTimeSolved:date});
         });
     }).then(function() {
         callback(true);

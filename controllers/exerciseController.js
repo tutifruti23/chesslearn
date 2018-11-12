@@ -20,15 +20,21 @@ exports.getExerciseForUser=function(req,res){
             exercisesModel.getRepeatExerciseForUser(userId,function(exercise){
                 if(exercise!==null){
                     exercisesModel.getExercise(exercise.docId,function(docExercise){
+                        docExercise.attempts=exercise.attempts;
+                        docExercise.lastTimeSolved=exercise.lastTimeSolved;
                         res.send(docExercise);
                     });
 
                 }else{
-                    exercisesModel.getNewExerciseForPlayer(1,5,userExercises,function(exercise){
+                    exercisesModel.getNewExerciseForPlayer(1,5,userExercises,function(exe){
                         if(exercise!==null){
                             userModel.addUserExercise(userId,exercise.docId);
+
                         }
-                        res.send(exercise);
+                        exe['lastTimeSolved']='never';
+                        exe['attempts']=0;
+                        console.log(exe);
+                        res.send(exe);
                     });
                 }
             });

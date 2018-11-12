@@ -5,7 +5,7 @@
         <link rel='stylesheet' href='stylesheets/chessboard.css' />
         <link href="stylesheets/portfolio-item.css" rel="stylesheet"/>
         <link href="stylesheets/notation.css" rel="stylesheet"/>
-        <link href="stylesheets/solveExercises.css" rel="stylesheet"/>
+        <link href="stylesheets/solveExercisesAndPuzzles.css" rel="stylesheet"/>
         <script src="javascripts/libraries/modes.js"></script>
         <script src="javascripts/libraries/jquery.js"></script>
         <script src="javascripts/libraries/chessboard.js"></script>
@@ -27,7 +27,8 @@
                         <div>Exercise level: <span>{{getExerciseLevel()}}</span></div>
                     </div>
                     <div class="d-flex border-top flex-column justify-content-between w-100 p-2">
-
+                        <div>Last time solved: <span>{{getUserLastAttemptDate()}}</span></div>
+                        <div>Attempts: <span>{{getUserAttempts()}}</span></div>
                     </div>
                 </div>
                 <div class="col-6 border justify-content-center d-flex  flex-column">
@@ -57,8 +58,8 @@
                         </div>
                     </div>
                     <div class="row h-25">
-                        <div class="btn big-button btn-danger col-12"  v-if="!reviewMode" v-on:click="giveUp()">Give up</div>
-                        <div class="btn big-button btn-success col-12" v-if="reviewMode"  v-on:click="nextPuzzle()">Next exercise</div>
+                        <div class="btn big-button btn-danger col-12"  v-if="!reviewMode"  v-on:click="giveUp()">Give up</div>
+                        <div class="btn big-button btn-success col-12" v-if="reviewMode"  v-bind:class="{disabled:!readyForNextPuzzles}" v-on:click="nextPuzzle()">Next exercise</div>
                     </div>
                 </div>
             </div>

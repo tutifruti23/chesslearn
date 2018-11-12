@@ -61,11 +61,15 @@ let loadExercise=function(){
                     token:token
                 },
                 function(result){
+                    settings.loading=false;
+                    settings.readyForNextPuzzles=true;
                     if(result){
+
                         userAndPuzzleData.exerciseData=result;
                         chessGame.setPosition(result.fen);
                         settings.playerColor=chessGame.chess.turn();
                         NotationMethods.newPosition(settings.listMoves,result.fen);
+
                         changeToExerciseMode();
                     }else{
 
@@ -107,21 +111,26 @@ let reviewHandler={
     }
 };
 let chessGame=ChessGame('board');
+chessGame.setPosition(PositionManipulator.getEmptyBoardFen());
 chessGame.setMode(gameMode);
 chessGame.setHandler(reviewHandler);
 let settings=new Vue({
     el:"#settings",
     data:{
         listMoves:NotationMethods.newListMoves(PositionManipulator.getStartFen()),
-        userLogged:'',
+        readyForNextPuzzles:false,
         reviewMode:true,
         playerColor:'',
         lastScore:true,
-        loading:false
+        loading:true,
     },
     methods:{
         nextPuzzle:function(){
-            loadExercise();
+
+            if(this.readyForNextPuzzles){
+                this.readyForNextPuzzles=false;
+                loadExercise();
+            }
         },
         getListMoves:function(){
             return this.reviewMode?this.listMoves.getNotation():this.listMoves.getRawNotation();
@@ -149,24 +158,29 @@ let userAndPuzzleData=new Vue({
     el:"#userAndPuzzleData",
     data:{
         userLogin:false,
-        exerciseData:undefined
+        exerciseData:undefined,
+
     },methods:{
         getExerciseId:function(){
             return this.exerciseData===undefined?'?':'#'+this. exerciseData.id;
 
         },getExerciseLevel:function(){
             return this.exerciseData===undefined?'?':this. exerciseData.level;
+        },getUserLastAttemptDate:function () {
+            return this.exerciseData===undefined||this. exerciseData.lastTimeSolved===undefined?'?':this. exerciseData.lastTimeSolved.slice(0,10);
+        },getUserAttempts:function(){
+            return this.exerciseData===undefined||this. exerciseData.attempts===undefined?'?':this. exerciseData.attempts;
         }
     }
 });
 let userController={
     initInfo:function(){
+        settings.readyForNextPuzzles=true;
+        settings.nextPuzzle();
 
-        setDataWithToken(function (token) {
-
-        })
     },
     logout:function(){
-
+        settings.readyForNextPuzzles=true;
+        settings.nextPuzzle();
     }
 };

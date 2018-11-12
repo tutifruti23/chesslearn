@@ -24,9 +24,12 @@ exports.addUserSolvePuzzle=function(userId,puzzleDocId){
 };
 exports.addUserExercise=function(userId,exerciseDocId){
     let ref= db.collection('users').doc(userId);
+    let date=new Date();
     ref.collection('exercises').doc(exerciseDocId).set({
         box:1,
-        nextAttempt:new Date()
+        nextAttempt:date,
+        lastTimeSolved:date,
+        attempts:0
     });
 
     ref.update({

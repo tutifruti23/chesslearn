@@ -5,6 +5,7 @@
         <link rel='stylesheet' href='stylesheets/chessboard.css' />
         <link href="stylesheets/portfolio-item.css" rel="stylesheet"/>
         <link href="stylesheets/notation.css" rel="stylesheet"/>
+        <link href="stylesheets/solveExercisesAndPuzzles.css" rel="stylesheet"/>
         <script src="javascripts/libraries/modes.js"></script>
         <script src="javascripts/libraries/jquery.js"></script>
         <script src="javascripts/libraries/chessboard.js"></script>
@@ -24,7 +25,7 @@
                     <div class="d-flex border-bottom flex-column justify-content-between w-100 p-2">
                         <div>Puzzle <span>{{getPuzzleId()}}</span></div>
                         <div>Puzzle rating: <span>{{getPuzzleRating()}}</span></div>
-                        <div>Attempts: <span>{{getPuzzleAttempts()}}</span></div>
+                        <div>Users attempts: <span>{{getPuzzleAttempts()}}</span></div>
                     </div>
                     <div class="d-flex border-top flex-column justify-content-between w-100 p-2">
                         <div>Your ranking: <span> {{rating}}</span></div>
@@ -39,12 +40,18 @@
                 </div>
 
                 <div id="settings" class="col-3 border justify-content-between d-flex  flex-column">
-                    <div class="row notation h-50">
+                    <div class="row notation h-25">
                         <div class="col" v-if="reviewMode">
                             <div id="notation" v-html="getListMoves()">
 
                             </div>
                         </div>
+                    </div>
+                    <div class="h-25 d-flex justify-content-center" >
+                        <div class="w-50 h-50 " v-if="loading">
+                            <div class="loader "></div>
+                        </div>
+
                     </div>
                     <div class="row h-25" v-if="playerColor!==''">
                             <div class="col-3 p-1 h-50 w-25 m-auto">
@@ -55,8 +62,8 @@
                             </div>
                     </div>
                     <div class="row h-25">
-                        <div class="btn big-button btn-secondary col-12"  v-if="!reviewMode" v-on:click="giveUp()">Show solution</div>
-                        <div class="btn big-button btn-success col-12" v-if="reviewMode"  v-on:click="nextPuzzle()">Next puzzle</div>
+                        <div class="btn big-button btn-secondary col-12"  v-if="!reviewMode"  v-on:click="giveUp()">Show solution</div>
+                        <div class="btn big-button btn-success col-12" v-if="reviewMode" v-bind:class="{disabled:!readyForNextPuzzles}" v-on:click="nextPuzzle()">Next puzzle</div>
                     </div>
                 </div>
             </div>

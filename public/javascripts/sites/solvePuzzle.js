@@ -1,5 +1,5 @@
 let loadPuzzle=function(){
-
+    settings.loading=true;
     setDataWithToken(function(token){
 
         let path=token===null?'/solvePuzzle/newRandomPuzzle':'/solvePuzzle/newPuzzleUser';
@@ -8,6 +8,8 @@ let loadPuzzle=function(){
                 token:token
             },
             function(result){
+                settings.loading=false;
+                settings.readyForNextPuzzles=true;
                 userAndPuzzleData.puzzleData=result;
                 changeToPuzzleMode();
                 chessGame.setPosition(result.fen);
@@ -117,6 +119,7 @@ let reviewHandler={
     }
 };
 let chessGame=ChessGame('board');
+chessGame.setPosition(PositionManipulator.getEmptyBoardFen());
 chessGame.setMode(gameMode);
 chessGame.setHandler(puzzleHandler);
 let settings=new Vue({
@@ -126,11 +129,17 @@ let settings=new Vue({
         userLogged:'',
         reviewMode:true,
         lastScore:true,
-        playerColor:''
+        playerColor:'',
+        readyForNextPuzzles:false,
+        loading:true
     },
     methods:{
         nextPuzzle:function(){
-            loadPuzzle()
+            if(this.readyForNextPuzzles){
+                this.readyForNextPuzzles=false;
+                loadPuzzle();
+            }
+
         },
         getListMoves:function(){
             return this.listMoves.getNotation();
@@ -157,12 +166,15 @@ let settings=new Vue({
 });
 let userController={
     initInfo:function(){
+        settings.readyForNextPuzzles=true;
+        settings.nextPuzzle();
         setDataWithToken(function (token) {
             getUserRating(token);
         });
     },
     logout:function(){
-
+        settings.readyForNextPuzzles=true;
+        settings.nextPuzzle();
         userAndPuzzleData.rating='?';
     }
 };
