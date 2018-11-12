@@ -27,8 +27,8 @@ exports.getExerciseForUser=function(req,res){
 
                 }else{
                     exercisesModel.getNewExerciseForPlayer(1,5,userExercises,function(exe){
-                        if(exercise!==null){
-                            userModel.addUserExercise(userId,exercise.docId);
+                        if(exe!==null){
+                            userModel.addUserExercise(userId,exe.docId);
 
                         }
                         exe['lastTimeSolved']='never';

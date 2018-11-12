@@ -30,7 +30,7 @@ exports.addUserExercise=function(userId,exerciseDocId){
         nextAttempt:date,
         lastTimeSolved:date,
         attempts:0
-    });
+    }).then(function(){}).catch(function(err){console.log(err)});
 
     ref.update({
         exercises: FieldValue.arrayUnion(exerciseDocId)
