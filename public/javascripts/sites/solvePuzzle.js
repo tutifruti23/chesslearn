@@ -1,3 +1,18 @@
+userController={
+    initInfo:function(){
+        settings.readyForNextPuzzles=true;
+        settings.nextPuzzle();
+        setDataWithToken(function (token) {
+            getUserRating(token);
+        });
+    },
+    logout:function(){
+        settings.readyForNextPuzzles=true;
+        settings.nextPuzzle();
+        userAndPuzzleData.rating='?';
+    }
+};
+
 let loadPuzzle=function(){
     settings.loading=true;
     setDataWithToken(function(token){
@@ -164,17 +179,3 @@ let settings=new Vue({
         }
     }
 });
-let userController={
-    initInfo:function(){
-        settings.readyForNextPuzzles=true;
-        settings.nextPuzzle();
-        setDataWithToken(function (token) {
-            getUserRating(token);
-        });
-    },
-    logout:function(){
-        settings.readyForNextPuzzles=true;
-        settings.nextPuzzle();
-        userAndPuzzleData.rating='?';
-    }
-};

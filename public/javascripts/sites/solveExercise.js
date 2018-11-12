@@ -1,4 +1,16 @@
 let engine=new Engine();
+userController={
+    initInfo:function(){
+        settings.readyForNextPuzzles=true;
+        settings.nextPuzzle();
+
+    },
+    logout:function(){
+        settings.readyForNextPuzzles=true;
+        settings.nextPuzzle();
+    }
+};
+
 engine.init(function(event){
     let match = event.match(/^bestmove ([a-h][1-8])([a-h][1-8])([qrbk])?/);
     if(match){
@@ -173,14 +185,3 @@ let userAndPuzzleData=new Vue({
         }
     }
 });
-let userController={
-    initInfo:function(){
-        settings.readyForNextPuzzles=true;
-        settings.nextPuzzle();
-
-    },
-    logout:function(){
-        settings.readyForNextPuzzles=true;
-        settings.nextPuzzle();
-    }
-};
