@@ -1,5 +1,5 @@
 let userData;
-let userController;
+var userController;
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         userData=user;
