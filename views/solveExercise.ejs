@@ -68,7 +68,7 @@
                     </div>
                     <div class="row h-25">
                         <div class="btn big-button btn-danger col-12"  v-if="!reviewMode && !loading"  v-on:click="giveUp()">Give up</div>
-                        <div class="btn big-button btn-success col-12" v-if="reviewMode || loading"  v-bind:class="{disabled:!readyForNextPuzzles||loading}" v-on:click="nextPuzzle()">Next exercise</div>
+                        <div class="btn big-button btn-success col-12" v-if="reviewMode || loading"  v-bind:class="{disabled:!readyForNextPuzzles|loading}" v-on:click="nextPuzzle()">Next exercise</div>
                     </div>
                 </div>
             </div>

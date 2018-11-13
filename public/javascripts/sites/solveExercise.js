@@ -1,15 +1,12 @@
 let engine=new Engine();
 userController={
     initInfo:function(user){
-        userAndPuzzleData.onlyRepetition=true;
         settings.readyForNextPuzzles=true;
-        settings.nextPuzzle();
-        userAndPuzzleData.onlyRepetition=false;
         userAndPuzzleData.setUserLogin(true,user.displayName);
+
     },
     logout:function(){
         settings.readyForNextPuzzles=true;
-        settings.nextPuzzle();
         userAndPuzzleData.setUserLogin(false);
     }
 };
@@ -166,7 +163,7 @@ let settings=new Vue({
         reviewMode:true,
         playerColor:'',
         lastScore:true,
-        loading:true,
+        loading:false,
     },
     methods:{
         nextPuzzle:function(){

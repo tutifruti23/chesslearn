@@ -1,12 +1,14 @@
 userController={
-    initInfo:function(){
+    initInfo:function(user){
         settings.readyForNextPuzzles=true;
         settings.nextPuzzle();
+        userAndPuzzleData.setUserLogin(true,user.displayName);
         setDataWithToken(function (token) {
             getUserRating(token);
         });
     },
     logout:function(){
+        userAndPuzzleData.setUserLogin(false);
         settings.readyForNextPuzzles=true;
         settings.nextPuzzle();
         userAndPuzzleData.rating='?';
@@ -25,11 +27,16 @@ let loadPuzzle=function(){
             function(result){
                 settings.loading=false;
                 settings.readyForNextPuzzles=true;
-                userAndPuzzleData.puzzleData=result;
-                changeToPuzzleMode();
-                chessGame.setPosition(result.fen);
-                NotationMethods.arrayMovesToListMoves(result.fen,settings.listMoves,result.solution);
-                settings.playerColor=chessGame.chess.turn();
+                if(result){
+                    userAndPuzzleData.puzzleData=result;
+                    changeToPuzzleMode();
+                    chessGame.setPosition(result.fen);
+                    NotationMethods.arrayMovesToListMoves(result.fen,settings.listMoves,result.solution);
+                    settings.playerColor=chessGame.chess.turn();
+                }else{
+                    userAndPuzzleData.displayInfo('Something goes wrong',false);
+                }
+
             }
         );
 
@@ -70,7 +77,11 @@ let userAndPuzzleData=new Vue({
         rating:'?',
         solved:0,
         unsolved:0,
-        puzzleData:undefined
+        puzzleData:undefined,
+        successText:false,
+        info:'',
+        userLogin:false,
+        loginInfo:''
     },methods:{
         increaseCounter:function(isGood){
             if(isGood)
@@ -85,6 +96,17 @@ let userAndPuzzleData=new Vue({
         },
         getPuzzleAttempts:function(){
             return this.puzzleData===undefined?'?':this.puzzleData.attempts;
+        },displayInfo:function(text,isSuccessText){
+            clearTimeout(this.timeout);
+            this.successText=isSuccessText;
+            this.info=text;
+            let handler=this;
+            this.timeout=setTimeout(function(){
+                handler.info='';
+            },6000)
+        },setUserLogin:function(isLogin,userName){
+            this.userLogin=isLogin;
+            this.loginInfo=isLogin?'Logged as '+userName:'You are not logged in, your progress will not be save!';
         }
     }
 });

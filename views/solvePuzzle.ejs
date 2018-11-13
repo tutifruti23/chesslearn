@@ -26,11 +26,18 @@
                         <div>Puzzle <span>{{getPuzzleId()}}</span></div>
                         <div>Puzzle rating: <span>{{getPuzzleRating()}}</span></div>
                         <div>Users attempts: <span>{{getPuzzleAttempts()}}</span></div>
-                    </div>
-                    <div class="d-flex border-top flex-column justify-content-between w-100 p-2">
-                        <div>Your ranking: <span> {{rating}}</span></div>
+                        <div class="border-top"></div>
                         <div>Solved: <span>{{solved}}</span></div>
                         <div>Unsolved: <span>{{unsolved}}</span></div>
+                        <div v-if="userLogin">Your ranking: <span> {{rating}}</span></div>
+                    </div>
+                    <div class="border-top h-25  d-flex  flex-column justify-content-between p-0">
+                        <div class="p-2 align-self-center"  v-bind:class="{errorInfo:!successText}" id="info">
+                            {{info}}
+                        </div>
+                        <div class="p-2" id="description" v-bind:class="{errorInfo:!userLogin}">
+                            {{loginInfo}}
+                        </div>
                     </div>
                 </div>
                 <div class="col-6 border justify-content-center d-flex  flex-column">
