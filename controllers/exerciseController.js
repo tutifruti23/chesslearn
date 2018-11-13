@@ -16,7 +16,7 @@ exports.getExerciseForUser=function(req,res){
     let data=req.body;
     let onlyRepetition=req.body.onlyRepetition;
     admin.getUserIdFromToken(data.token,function(userId){
-        userModel.getUserExercises(userId,function(userExercises,userBlockedExercises){
+        userModel.getUserExercises(userId,function(userExercises,userBlockedExercises,minLevel,maxLevel){
             exercisesModel.getRepeatExerciseForUser(userId,function(exercise){
                 if(exercise!==null){
                     exercisesModel.getExercise(exercise.docId,function(docExercise){
@@ -27,7 +27,7 @@ exports.getExerciseForUser=function(req,res){
 
                 }else{
                     if(onlyRepetition==='false'){
-                        exercisesModel.getNewExerciseForPlayer(1,5,userExercises,userBlockedExercises,function(exe){
+                        exercisesModel.getNewExerciseForPlayer(minLevel,maxLevel,userExercises,userBlockedExercises,function(exe){
                             if(exe!==null){
                                 userModel.addUserExercise(userId,exe.docId);
                                 exe['lastTimeSolved']='never';

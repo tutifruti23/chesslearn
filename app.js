@@ -13,6 +13,7 @@ let createPuzzleRouter=require('./routes/createPuzzle');
 let solvePuzzleRouter=require('./routes/solvePuzzles');
 let createExerciseRouter=require('./routes/createExercise');
 let solveExerciseRouter=require('./routes/solveExercise');
+let settingsRouter=require('./routes/settings');
 let app = express();
 
 // view engine setup
@@ -33,6 +34,7 @@ app.use('/createPuzzle',createPuzzleRouter);
 app.use('/solvePuzzle',solvePuzzleRouter);
 app.use('/createExercise',createExerciseRouter);
 app.use('/solveExercise',solveExerciseRouter);
+app.use('/settings',settingsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
