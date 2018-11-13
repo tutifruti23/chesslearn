@@ -43,7 +43,7 @@ exports.addUserExercise=function(userId,exerciseDocId){
 exports.getUserRatingAndLastPuzzles=function(userId,callback){
     db.collection('users').doc(userId).get().then(function(doc){
         let data=doc.data();
-        callback(data.rating,data.lastPuzzles);
+        callback(data.rating,data.lastPuzzles===undefined?[]:data.lastPuzzles);
     });
 };
 exports.getUserExercises=function(userId,callback){
