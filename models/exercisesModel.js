@@ -55,7 +55,7 @@ exports.getRandomExercise=function(callback){
 
     });
 };
-exports.getNewExerciseForPlayer=function(minLevel,maxLevel,userExercises,callback){
+exports.getNewExerciseForPlayer=function(minLevel,maxLevel,userExercises,userBlockedExercises,callback){
     if(minLevel>maxLevel){
         callback(null);
         return;
@@ -64,7 +64,7 @@ exports.getNewExerciseForPlayer=function(minLevel,maxLevel,userExercises,callbac
         let size=snapshot.size;
         let isDone=false;
         for(let i=0;i<size;i++){
-            if(!userExercises.includes(snapshot.docs[i].id)){
+            if(!userExercises.includes(snapshot.docs[i].id) && !userBlockedExercises.includes(snapshot.docs[i].id)){
                 let data=snapshot.docs[i].data();
                 data['docId']=snapshot.docs[i].id;
                 callback(data);

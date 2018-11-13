@@ -6,7 +6,7 @@ $(function(){
         if (user) {
             userData=user;
             displayUserData(user);
-            userController.initInfo();
+            userController.initInfo(user);
         } else {
             userController.logout();
         }

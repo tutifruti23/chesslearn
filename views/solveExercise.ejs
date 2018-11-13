@@ -25,10 +25,19 @@
                     <div class="d-flex border-bottom flex-column justify-content-between w-100 p-2">
                         <div>Exercise <span>{{getExerciseId()}}</span></div>
                         <div>Exercise level: <span>{{getExerciseLevel()}}</span></div>
+                        <div v-if="userLogin" class="border-top w-100"></div>
+                        <div v-if="userLogin">Last time solved: <span>{{getUserLastAttemptDate()}}</span></div>
+                        <div v-if="userLogin">Attempts: <span>{{getUserAttempts()}}</span></div>
+                        <label  v-if="userLogin"> <input type="checkbox"  v-model="onlyRepetition"  value=""/> Only repetition</label>
+                        <div  v-if="userLogin" v-on:click="removeExercise()" v-bind:class="{disabled:exerciseData===undefined}" class="btn btn-danger col-12">Remove exercise</div>
                     </div>
-                    <div class="d-flex border-top flex-column justify-content-between w-100 p-2">
-                        <div>Last time solved: <span>{{getUserLastAttemptDate()}}</span></div>
-                        <div>Attempts: <span>{{getUserAttempts()}}</span></div>
+                    <div class="border-top h-25  d-flex  flex-column justify-content-between p-0">
+                        <div class="p-2 align-self-center"  v-bind:class="{errorInfo:!successText}" id="info">
+                            {{info}}
+                        </div>
+                        <div class="p-2" id="description" v-bind:class="{errorInfo:!userLogin}">
+                            {{loginInfo}}
+                        </div>
                     </div>
                 </div>
                 <div class="col-6 border justify-content-center d-flex  flex-column">
@@ -58,8 +67,8 @@
                         </div>
                     </div>
                     <div class="row h-25">
-                        <div class="btn big-button btn-danger col-12"  v-if="!reviewMode"  v-on:click="giveUp()">Give up</div>
-                        <div class="btn big-button btn-success col-12" v-if="reviewMode"  v-bind:class="{disabled:!readyForNextPuzzles}" v-on:click="nextPuzzle()">Next exercise</div>
+                        <div class="btn big-button btn-danger col-12"  v-if="!reviewMode && !loading"  v-on:click="giveUp()">Give up</div>
+                        <div class="btn big-button btn-success col-12" v-if="reviewMode || loading"  v-bind:class="{disabled:!readyForNextPuzzles||loading}" v-on:click="nextPuzzle()">Next exercise</div>
                     </div>
                 </div>
             </div>

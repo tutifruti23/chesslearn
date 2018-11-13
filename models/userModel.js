@@ -49,7 +49,9 @@ exports.getUserRatingAndLastPuzzles=function(userId,callback){
 exports.getUserExercises=function(userId,callback){
     db.collection('users').doc(userId).get().then(function(doc){
         let data=doc.data();
-        callback(data.exercises);
+        let exercises=data.exercises===undefined?[]:data.exercises;
+        let exercisesBlocked=data.exercisesBlocked===undefined?[]:data.exercisesBlocked;
+        callback(exercises,exercisesBlocked);
     });
 };
 exports.getUserData=function(userId,parameters,callback){

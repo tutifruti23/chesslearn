@@ -13,7 +13,10 @@ router.post('/newExerciseUser', function(req, res, next) {
     exerciseController.getExerciseForUser(req,res);
 });
 router.post('/exerciseComplete', function(req, res, next) {
-    solveExerciseController.solvePuzzleUser(req,res);
+    solveExerciseController.solveExerciseUser(req,res);
 });
-
+router.post('/removeExercise',function(req,res){
+    console.log('dzialam');
+    solveExerciseController.removeExerciseUser(req,res);
+});
 module.exports = router;

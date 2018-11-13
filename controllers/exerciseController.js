@@ -12,11 +12,11 @@ exports.getRandomExercise=function(req,res){
     });
 };
 exports.getExerciseForUser=function(req,res){
+    console.log(req.body);
     let data=req.body;
+    let onlyRepetition=req.body.onlyRepetition;
     admin.getUserIdFromToken(data.token,function(userId){
-        userModel.getUserExercises(userId,function(userExercises){
-           if(!userExercises)
-               userExercises=[];
+        userModel.getUserExercises(userId,function(userExercises,userBlockedExercises){
             exercisesModel.getRepeatExerciseForUser(userId,function(exercise){
                 if(exercise!==null){
                     exercisesModel.getExercise(exercise.docId,function(docExercise){
@@ -26,16 +26,19 @@ exports.getExerciseForUser=function(req,res){
                     });
 
                 }else{
-                    exercisesModel.getNewExerciseForPlayer(1,5,userExercises,function(exe){
-                        if(exe!==null){
-                            userModel.addUserExercise(userId,exe.docId);
+                    if(onlyRepetition==='false'){
+                        exercisesModel.getNewExerciseForPlayer(1,5,userExercises,userBlockedExercises,function(exe){
+                            if(exe!==null){
+                                userModel.addUserExercise(userId,exe.docId);
+                                exe['lastTimeSolved']='never';
+                                exe['attempts']=0;
+                            }
+                            res.send(exe);
+                        });
+                    }else{
+                        res.send(null);
+                    }
 
-                        }
-                        exe['lastTimeSolved']='never';
-                        exe['attempts']=0;
-                        console.log(exe);
-                        res.send(exe);
-                    });
                 }
             });
         });

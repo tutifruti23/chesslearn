@@ -1,13 +1,16 @@
 let engine=new Engine();
 userController={
-    initInfo:function(){
+    initInfo:function(user){
+        userAndPuzzleData.onlyRepetition=true;
         settings.readyForNextPuzzles=true;
         settings.nextPuzzle();
-
+        userAndPuzzleData.onlyRepetition=false;
+        userAndPuzzleData.setUserLogin(true,user.displayName);
     },
     logout:function(){
         settings.readyForNextPuzzles=true;
         settings.nextPuzzle();
+        userAndPuzzleData.setUserLogin(false);
     }
 };
 
@@ -63,31 +66,59 @@ function exerciseCompleted(result,callback){
     });
     return exerciseComplete;
 }
+let removeExercise=function(){
+    settings.loading=true;
+   setDataWithToken(function(token){
+      if(token){
+          $.post(
+              '/solveExercise/removeExercise',
+              {
+                  token:token,
+                  docId:userAndPuzzleData.exerciseData.docId
+              },function(result){
+                  settings.nextPuzzle();
+
+              }
+      );
+      }
+
+   });
+};
 let loadExercise=function(){
+    settings.loading=true;
+    userAndPuzzleData.exerciseData=undefined;
+    let onlyRepetition=userAndPuzzleData.onlyRepetition;
     setDataWithToken(function(token){
         let path=token===null?'/solveExercise/newRandomExercise':'/solveExercise/newExerciseUser';
-        if(userAndPuzzleData)
+        if(userAndPuzzleData) {
+
             $.post(
                 path
-                ,{
-                    token:token
+                , {
+                    token: token,
+                    onlyRepetition:onlyRepetition
                 },
-                function(result){
-                    settings.loading=false;
-                    settings.readyForNextPuzzles=true;
-                    if(result){
+                function (result) {
+                    settings.loading = false;
+                    settings.readyForNextPuzzles = true;
+                    if (result) {
 
-                        userAndPuzzleData.exerciseData=result;
+                        userAndPuzzleData.exerciseData = result;
                         chessGame.setPosition(result.fen);
-                        settings.playerColor=chessGame.chess.turn();
-                        NotationMethods.newPosition(settings.listMoves,result.fen);
+                        settings.playerColor = chessGame.chess.turn();
+                        NotationMethods.newPosition(settings.listMoves, result.fen);
 
                         changeToExerciseMode();
-                    }else{
-
+                    } else {
+                        if(onlyRepetition && token){
+                            userAndPuzzleData.displayInfo('No exercises to repeat',false);
+                        }else{
+                            userAndPuzzleData.displayInfo('No more exercises in database',);
+                        }
                     }
                 }
             );
+        }
     });
 
 
@@ -116,6 +147,7 @@ function changeToExerciseMode(){
     chessGame.setMode(allowOnlyOneSideMode);
     settings.listMoves.setListener(null);
 }
+
 let reviewHandler={
     init:function(){},
     update:function(chessBoard,move){
@@ -163,7 +195,7 @@ let settings=new Vue({
             }else{
                 return "img/chesspieces/wikipedia/"+(this.playerColor==='b'?'b':'w')+"R.png";
             }
-        },
+        }
     }
 });
 let userAndPuzzleData=new Vue({
@@ -171,6 +203,11 @@ let userAndPuzzleData=new Vue({
     data:{
         userLogin:false,
         exerciseData:undefined,
+        onlyRepetition:false,
+        info:'',
+        successText:false,
+        loginInfo:'',
+        timeout:undefined
 
     },methods:{
         getExerciseId:function(){
@@ -182,6 +219,21 @@ let userAndPuzzleData=new Vue({
             return this.exerciseData===undefined||this. exerciseData.lastTimeSolved===undefined?'?':this. exerciseData.lastTimeSolved.slice(0,10);
         },getUserAttempts:function(){
             return this.exerciseData===undefined||this. exerciseData.attempts===undefined?'?':this. exerciseData.attempts;
+        },displayInfo:function(text,isSuccessText){
+            clearTimeout(this.timeout);
+            this.successText=isSuccessText;
+            this.info=text;
+            let handler=this;
+            this.timeout=setTimeout(function(){
+                handler.info='';
+            },6000)
+        },setUserLogin:function(isLogin,userName){
+            this.userLogin=isLogin;
+            this.loginInfo=isLogin?'Logged as '+userName:'You are not logged in, your progress will not be save!';
+        },removeExercise:function () {
+            if(this.exerciseData!==undefined){
+                removeExercise();
+            }
         }
     }
 });

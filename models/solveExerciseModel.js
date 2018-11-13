@@ -1,4 +1,5 @@
 let db=require("./firebase/adminFirebase").db;
+let FieldValue=require('./firebase/adminFirebase').FieldValue;
 function addDays(date, days) {
     var result = new Date(date);
     result.setDate(result.getDate() + days);
@@ -46,7 +47,24 @@ exports.solveExerciseUser=function(userId,isGood,exerciseDocId,callback){
 
 };
 
+exports.removeExerciseUser=function(userId,exerciseDocId,callback){
+  let ref=db.collection('users').doc(userId);
 
+  ref.update({
+      exercisesBlocked: FieldValue.arrayUnion(exerciseDocId),
+      exercises: FieldValue.arrayRemove(exerciseDocId),
+  }).then(function(){
+      ref.collection('exercises').doc(exerciseDocId).delete().then(function () {
+          callback(true);
+      }).catch(function(err){
+          console.log(err);
+          callback(false);
+      });
+  }).catch(function(err){
+      console.log(err);
+      callback(false);
+  });
+};
 
 
 
