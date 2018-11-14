@@ -98,7 +98,7 @@ let loadExercise=function(){
                 function (result) {
                     settings.loading = false;
                     settings.readyForNextPuzzles = true;
-                    if (result) {
+                    if (result&&result!==null) {
 
                         userAndPuzzleData.exerciseData = result;
                         chessGame.setPosition(result.fen);

@@ -29,7 +29,7 @@
                         <div v-if="userLogin">Last time solved: <span>{{getUserLastAttemptDate()}}</span></div>
                         <div v-if="userLogin">Attempts: <span>{{getUserAttempts()}}</span></div>
                         <label  v-if="userLogin"> <input type="checkbox"  v-model="onlyRepetition"  value=""/> Only repetition</label>
-                        <div  v-if="userLogin" v-on:click="removeExercise()" v-bind:class="{disabled:exerciseData===undefined}" class="btn btn-danger col-12">Remove exercise</div>
+                        <div  v-if="userLogin" v-on:click="removeExercise()" v-bind:class="{disabled:exerciseData===undefined}" class="btn btn-danger ">Remove exercise</div>
                     </div>
                     <div class="border-top h-25  d-flex  flex-column justify-content-between p-0">
                         <div class="p-2 align-self-center"  v-bind:class="{errorInfo:!successText}" id="info">
