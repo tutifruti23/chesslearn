@@ -96,10 +96,12 @@ let loadExercise=function(){
                     onlyRepetition:onlyRepetition
                 },
                 function (result) {
+                    console.log(result);
                     settings.loading = false;
                     settings.readyForNextPuzzles = true;
+                    console.log(userAndPuzzleData);
                     if (result&&result!==null) {
-
+                        console.log('here');
                         userAndPuzzleData.exerciseData = result;
                         chessGame.setPosition(result.fen);
                         settings.playerColor = chessGame.chess.turn();
@@ -107,6 +109,7 @@ let loadExercise=function(){
 
                         changeToExerciseMode();
                     } else {
+                        changeToReview(false);
                         if(onlyRepetition && token){
                             userAndPuzzleData.displayInfo('No exercises to repeat',false);
                         }else{
