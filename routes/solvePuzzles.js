@@ -5,7 +5,7 @@ let solvePuzzleController=require('../controllers/solvePuzzleController');
 let userController=require('../controllers/userController');
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('solvePuzzle', { title: 'Express' });
+    res.render('solvePuzzle', { });
 });
 router.post('/newRandomPuzzle', function(req, res, next) {
    puzzleController.getRandomPuzzle(req,res);

@@ -38,6 +38,7 @@ guideAndTips=new Vue({
         setData:function(data){
             this.img=data.img;
             this.title=data.title;
+            this.exerciseDescription=data.exerciseDescription;
             if(data.positions!==undefined){
                 this.positions=data.positions;
             }

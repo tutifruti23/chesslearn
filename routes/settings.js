@@ -3,7 +3,7 @@ let router = express.Router();
 let userController=require('../controllers/userController');
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('settings', { title: 'Express' });
+    res.render('settings', { site:'account' });
 });
 router.post('/getUserLevels',function(req,res){
     userController.getUserLevels(req,res);

@@ -4,7 +4,7 @@ let exerciseController=require('../controllers/exerciseController');
 let solveExerciseController=require('../controllers/solveExerciseContrroler');
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('solveExercise', { title: 'Express' });
+    res.render('solveExercise', {});
 });
 router.post('/newRandomExercise', function(req, res, next) {
     exerciseController.getRandomExercise(req,res);

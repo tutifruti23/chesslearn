@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <meta name="description" content=""/>
         <meta name="author" content=""/>
+
         <% include includes/scriptsAndSheets.ejs%>
 
         <!-- Custom styles for this template -->
@@ -62,11 +63,24 @@
                         </div>
 
                         <div class="col-3 border" id="guide">
-                            <h3 class="my-3">{{title}}</h3>
-                            <ul>
-                                <li v-for="line in description">{{line}}</li>
-                            </ul>
-                            <img class="img-example" v-if="img!==''" v-bind:src="getImgPath()"/>
+                            <div class=" h-100 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h3 class="my-3">{{title}}</h3>
+                                    <ul>
+                                        <li v-for="line in description">{{line}}</li>
+                                    </ul>
+                                    <img class="img-example" v-if="img!==''" v-bind:src="getImgPath()"/>
+                                </div>
+                                <div class="border-top h-25 d-flex flex-column justify-content-center">
+                                    <div class="mx-auto">
+                                        <h3>Exercise</h3>
+                                    </div>
+                                    <div class="mx-auto">
+                                        {{exerciseDescription}}
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
@@ -85,6 +99,10 @@
             $("#menu-toggle").click(function(e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
+            });
+
+            $(function(){
+                $('#basics').addClass('active');
             });
 
         </script>

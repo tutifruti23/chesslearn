@@ -35,32 +35,32 @@ let data=[{
 
   },{
       title:"Pawn",
-      exerciseDescription:"Capture black pieces",
+      exerciseDescription:"Show all possible pawn moves",
       exerciseHint:"",
       description:[],
       img:"pawn.png",
 
   },{
       title:"Pawn promotion",
-      exerciseDescription:"",
+      exerciseDescription:"Promote a pawn",
       description:[],
-      img:"",
+      img:"pawnpromotion.png",
 
   },{
       title:"Check",
-      exerciseDescription:"",
+      exerciseDescription:"Give check in every move",
       description:[],
       img:"check.png",
 
   },{
       title:"Check - defend",
-      exerciseDescription:"",
+      exerciseDescription:"Defend your king",
       description:[],
       img:"checkdefend.png",
 
   },{
       title:"Checkmate",
-      exerciseDescription:"",
+      exerciseDescription:"Give checkmate",
       description:[],
       img:"checkmate.png",
       positions:[
@@ -70,7 +70,7 @@ let data=[{
       ]
   },{
       title:"Stalemate",
-      exerciseDescription:"",
+      exerciseDescription:"Give stalemate",
       description:[],
       img:"stalemate.png",
         positions:[
@@ -79,7 +79,7 @@ let data=[{
         ]
   },{
       title:"Castle",
-      exerciseDescription:"",
+      exerciseDescription:"Make castle",
       description:[],
       img:"castle.png",
         positions:[
@@ -89,7 +89,7 @@ let data=[{
         ]
   },{
       title:"En-passant",
-      exerciseDescription:"",
+      exerciseDescription:"Make en-passant move",
       description:[],
       img:"enpassant.png",
   }
@@ -98,7 +98,6 @@ let chapters=[
     {
         name:"Rook",
             method:function(){
-            console.log('dzia;am');
             chessGame.setHandler(pawnsCapturingEventHandler('r'));
             chessGame.setMode(oneColorMovesModeWithoutKingControl);
         }
