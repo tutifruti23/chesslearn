@@ -61,6 +61,15 @@ exports.getUserData=function(userId,parameters,callback){
         callback(doc.data());
     });
 };
+exports.checkUserIsCreator=function(userId,callback){
+    db.collection('users').doc(userId).get().then(function(doc){
+        let data=doc.data();
+        if(data.isCreator)
+            callback(true);
+        else
+            callback(false);
+    });
+};
 exports.getUserLevels=function(userId,callback){
   db.collection('users').doc(userId).get().then(function(doc) {
       let levels = {};

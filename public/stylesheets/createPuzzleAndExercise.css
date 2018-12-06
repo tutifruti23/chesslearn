@@ -11,3 +11,6 @@
 .disableSettings{
     pointer-events:none !important;
 }
+#app{
+    opacity: 0;
+}

@@ -1,3 +1,21 @@
+userController={
+    initInfo:function(user){
+
+        setDataWithToken(function(token) {
+            $.post('/createPuzzle/checkUserIsCreator',{token:token}, function (isCreator) {
+                if(isCreator){
+                    $('#app').css('opacity','1');
+                }else{
+                    window.location.href='/';
+                }
+
+            }); 
+        });
+    },
+    logout:function(){
+        window.location.href='/';
+    }
+};
 let chessGame=ChessGame('board');
 let engine=new Engine();
 let num_threads = 2;

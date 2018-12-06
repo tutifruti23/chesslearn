@@ -39,3 +39,12 @@ exports.deleteUserExercisesHistory=function(req,res){
         });
     });
 };
+exports.checkUserIsCreator=function(req,res){
+    let data=req.body;
+    admin.getUserIdFromToken(data.token,function(uid){
+        userModel.checkUserIsCreator(uid,function(isCreator){
+           res.send(isCreator);
+
+        });
+    });
+};

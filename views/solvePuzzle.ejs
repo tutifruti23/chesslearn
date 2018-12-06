@@ -56,13 +56,13 @@
                     </div>
                     <div class="h-25 d-flex justify-content-center" >
                         <div class="w-50 h-50 " v-if="loading">
-                            <div class="loader "></div>
+                            <div class="loader h-100 "></div>
                         </div>
 
                     </div>
                     <div class="row h-25" v-if="playerColor!==''">
                             <div class="col-3 p-1 h-50 w-25 m-auto">
-                                <img v-bind:src="getInfoImagePath()" class="w-100"> </img>
+                                <img v-bind:src="getInfoImagePath()" class="w-100"/>
                             </div>
                             <div class="offset-1 col-8  pt-3   m-auto align-middle">
                                 {{getInfoText()}}
