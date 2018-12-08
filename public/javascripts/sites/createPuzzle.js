@@ -9,7 +9,7 @@ userController={
                     window.location.href='/';
                 }
 
-            }); 
+            });
         });
     },
     logout:function(){
