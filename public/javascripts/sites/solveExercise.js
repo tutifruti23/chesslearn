@@ -124,7 +124,9 @@ let loadExercise=function(){
 
 };
 let exerciseHandler={
-    init:function(){},
+    init:function(){
+        settings.listMoves.disableKeysNavigation();
+    },
     update:function(chessBoard,move){
         settings.listMoves.newMove(move.san,chessBoard.chess.fen());
         if(!isGameOver(true)){
@@ -140,16 +142,20 @@ function changeToReview(isOk){
     settings.listMoves.setListener(function(move){
         chessGame.setPosition(move.position);
     });
+    chessGame.handlerInit();
 }
 function changeToExerciseMode(){
     settings.reviewMode=false;
     chessGame.setHandler(exerciseHandler);
     chessGame.setMode(allowOnlyOneSideMode);
     settings.listMoves.setListener(null);
+    chessGame.handlerInit();
 }
 
 let reviewHandler={
-    init:function(){},
+    init:function(){
+        settings.listMoves.enableKeysNavigation();
+    },
     update:function(chessBoard,move){
         settings.listMoves.newMove(move.san,chessBoard.chess.fen());
     }

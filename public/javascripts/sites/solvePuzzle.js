@@ -112,7 +112,10 @@ let userAndPuzzleData=new Vue({
 });
 
 let puzzleHandler={
-    init:function(){},
+    init:function(){
+        console.log('puzzle');
+        settings.listMoves.disableKeysNavigation();
+    },
     update:function(chessboard,move){
         settings.listMoves.next();
         if(move.san === settings.listMoves.current.move){
@@ -137,18 +140,23 @@ function changeToReview(isOk){
     settings.reviewMode=true;
     chessGame.setHandler(reviewHandler);
     chessGame.setMode(gameMode);
+
     settings.listMoves.setListener(function(move){
         chessGame.setPosition(move.position);
     });
+    chessGame.handlerInit();
     setScore(isOk?1:-1);
 }
 function changeToPuzzleMode(){
     settings.reviewMode=false;
     chessGame.setHandler(puzzleHandler);
     settings.listMoves.setListener(null);
+    chessGame.handlerInit();
 }
 let reviewHandler={
     init:function(){
+        console.log('review');
+        settings.listMoves.enableKeysNavigation();
         settings.reviewMode=true;
     },
     update:function(chessBoard,move){

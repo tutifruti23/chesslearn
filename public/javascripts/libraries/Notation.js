@@ -24,8 +24,8 @@ function ListMoves(startMove){
 
     let list={
         tags:{
-            Event:"Jakis event",
-            Date:'Jakas data'
+            Event:"?",
+            Date:'?'
         },
         firstMove:startMove,
         current:startMove,
@@ -43,6 +43,20 @@ function ListMoves(startMove){
             this.current=move;
             if(this.listener!==null){
                 this.listener(this.current);
+            }
+        },enableKeysNavigation:function(){
+            let handler=this;
+            $('body').bind('keypress',handler.keysNavigationFunction);
+        },disableKeysNavigation:function(){
+            let handler=this;
+            $('body').unbind('keypress',handler.keysNavigationFunction);
+        },
+        keysNavigationFunction:function(event){
+            if(event.keyCode === 37) { // left
+                list.prev();
+            }
+            else if(event.keyCode === 39) { // right
+                list.next();
             }
         },
         newMove:function(move,position){
