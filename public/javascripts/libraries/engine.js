@@ -22,7 +22,7 @@ function Engine() {
 
       let params=infoSplit[0].split(' ');
 
-      info['pv']=infoSplit[1];
+      info['pv']=infoSplit[1].split(' pvSan ')[0];
       for(let i=1;i<params.length;i=i+2){
           if(params[i]==='score')
               i++;
