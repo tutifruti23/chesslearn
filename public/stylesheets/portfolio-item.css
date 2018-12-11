@@ -27,7 +27,7 @@ body {
 }
 body{
    background-image:url('../back.jpg') !important;
-
+  background-size: 100%;
  }
 .border-top,.border-bottom,.border,.border-left,.border-right{
   border-color: lightgray !important;
