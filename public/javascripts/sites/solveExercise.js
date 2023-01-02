@@ -204,6 +204,7 @@ let settings=new Vue({
         }
     }
 });
+
 let userAndPuzzleData=new Vue({
     el:"#userAndPuzzleData",
     data:{
