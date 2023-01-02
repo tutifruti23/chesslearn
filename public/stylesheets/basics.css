@@ -1,17 +1,17 @@
-.img-example{
-    width:200px;
-    height: 200px;
+.img-example {
+  width: 200px;
+  height: 200px;
 }
-.goodBadMark{
-    height:40px;
-    width:30px;
+.goodBadMark {
+  height: 40px;
+  width: 30px;
 }
-.goodBadCounter{
-    font-size: 30px;
+.goodBadCounter {
+  font-size: 30px;
 }
-.lastResult{
-    font-weight: bold;
+.lastResult {
+  font-weight: bold;
 }
-.list-group-item{
-    background: #EAE6DA ;
+.list-group-item {
+  background: #eae6da;
 }

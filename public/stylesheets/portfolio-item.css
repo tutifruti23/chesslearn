@@ -6,7 +6,7 @@
 
 body {
   padding-top: 40px;
-  background-color:#EAE6DA
+  background-color: #eae6da;
 }
 
 @media (min-width: 992px) {
@@ -14,22 +14,24 @@ body {
     padding-top: 40px;
   }
 }
-.content{
+.content {
   margin-top: 20px;
-  background-color:#EAE6DA
+  background-color: #eae6da;
 }
-.list-group-item:hover{
+.list-group-item:hover {
   cursor: pointer;
-
 }
-.big-button{
+.big-button {
   padding: 20% 0;
 }
-body{
-   background-image:url('../back.jpg') !important;
+body {
+  background-image: url('../back.jpg') !important;
   background-size: 100%;
- }
-.border-top,.border-bottom,.border,.border-left,.border-right{
+}
+.border-top,
+.border-bottom,
+.border,
+.border-left,
+.border-right {
   border-color: lightgray !important;
-
 }

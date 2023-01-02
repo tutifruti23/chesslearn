@@ -1,6 +1,3 @@
-let admin=require('./firebase/adminFirebase').admin;
+let admin = require('./firebase/adminFirebase').admin;
 
-exports.checkToken=function(userId,token,callback){
-
-};
-
+exports.checkToken = function (userId, token, callback) {};

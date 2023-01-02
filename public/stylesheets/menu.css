@@ -1,6 +1,6 @@
-#accountInfoMenu{
-    display:none;
+#accountInfoMenu {
+  display: none;
 }
-.dropdown-item{
-    cursor: pointer;
+.dropdown-item {
+  cursor: pointer;
 }

@@ -1,9 +1,9 @@
-let admin = require("firebase-admin");
+let admin = require('firebase-admin');
 exports.FieldValue = admin.firestore.FieldValue;
-let serviceAccount = require("./service2.json");
+let serviceAccount = require('./service2.json');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://chesstrainer-c8633.firebaseio.com/",
+  databaseURL: 'https://chesstrainer-c8633.firebaseio.com/',
 });
 exports.admin = admin;
 const db = admin.firestore();

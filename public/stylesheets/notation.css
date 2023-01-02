@@ -1,14 +1,12 @@
-.mainLine{
-    font-weight: bold;
-
+.mainLine {
+  font-weight: bold;
 }
-.currentMove{
-    color:red;
+.currentMove {
+  color: red;
 }
-.singleMove:hover{
-    cursor:pointer;
+.singleMove:hover {
+  cursor: pointer;
 }
-.notation{
-    overflow-y: scroll;
-
+.notation {
+  overflow-y: scroll;
 }

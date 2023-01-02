@@ -1,16 +1,15 @@
-#info{
-    font-size: 20px;
-
+#info {
+  font-size: 20px;
 }
-.successInfo{
-    color:green;
+.successInfo {
+  color: green;
 }
-.errorInfo{
-    color:red;
+.errorInfo {
+  color: red;
 }
-.disableSettings{
-    pointer-events:none !important;
+.disableSettings {
+  pointer-events: none !important;
 }
-#app{
-    opacity: 0;
+#app {
+  opacity: 0;
 }

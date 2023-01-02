@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "prettier": "prettier --check ./",
+    "prettier-fix": "prettier --write ./"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
@@ -17,5 +19,8 @@
     "morgan": "^1.9.1",
     "pgn-parser": "0.0.9",
     "random-int": "^1.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.1"
   }
 }
